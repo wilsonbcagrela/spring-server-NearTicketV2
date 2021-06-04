@@ -37,9 +37,15 @@ public class SignupApiController implements SignupApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> registerClient(@ApiParam(value = "Created client object" ,required=true )  @Valid @RequestBody Client body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> registerClient(@RequestParam String name, @RequestParam String email,@RequestParam String password, @RequestParam String phone, @RequestParam Boolean isEmailConfirmed) {
+        // String accept = request.getHeader("Accept");
+        Client n = new Client();
+        n.setName(name);
+        n.setEmail(email);
+        n.setPassword(password);
+        n.setPhone(phone);
+        n.setIsEmailConfirmed(isEmailConfirmed);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
 }

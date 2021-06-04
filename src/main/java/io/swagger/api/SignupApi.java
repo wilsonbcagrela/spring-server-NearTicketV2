@@ -34,6 +34,6 @@ public interface SignupApi {
     @RequestMapping(value = "/signup",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> registerClient(@ApiParam(value = "Created client object" ,required=true )  @Valid @RequestBody Client body);
+    ResponseEntity<Void> registerClient(@RequestParam String name, @RequestParam String email,@RequestParam String password, @RequestParam String phone, @RequestParam Boolean isEmailConfirmed);
 
 }

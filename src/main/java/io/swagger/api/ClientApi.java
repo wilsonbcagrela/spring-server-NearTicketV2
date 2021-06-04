@@ -35,7 +35,7 @@ public interface ClientApi {
     @RequestMapping(value = "/client/user",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> createUser(@ApiParam(value = "Created user object" ,required=true )  @Valid @RequestBody User body);
+    ResponseEntity<Void> createUser(@RequestParam String name, @RequestParam String email);
 
 
     @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags={ "client", })
