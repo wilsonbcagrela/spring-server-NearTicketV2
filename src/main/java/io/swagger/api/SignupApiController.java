@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.api.SignupRepository;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +33,25 @@ public class SignupApiController implements SignupApi {
 
     private final HttpServletRequest request;
 
+    private SignupRepository signupRepository;
+
     @org.springframework.beans.factory.annotation.Autowired
     public SignupApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> registerClient(@RequestParam String name, @RequestParam String email,@RequestParam String password, @RequestParam String phone, @RequestParam Boolean isEmailConfirmed) {
+    public @ResponseBody String registerClient(@RequestParam String name, @RequestParam String email,@RequestParam String password, @RequestParam String phone, @RequestParam Boolean isEmailConfirmed) {
         // String accept = request.getHeader("Accept");
         Client n = new Client();
         n.setName(name);
-        n.setEmail(email);
         n.setPassword(password);
+        n.setEmail(email);
         n.setPhone(phone);
         n.setIsEmailConfirmed(isEmailConfirmed);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        signupRepository.save(n);
+        return "saved";
+        // return SignupRepository.clas;
     }
 
 }

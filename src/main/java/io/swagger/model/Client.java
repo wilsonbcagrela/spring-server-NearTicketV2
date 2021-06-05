@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
 
 public class Client   {
   @JsonProperty("id")
-  private Long id = null;
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -35,7 +35,7 @@ public class Client   {
   @JsonProperty("isEmailConfirmed")
   private Boolean isEmailConfirmed = false;
 
-  public Client id(Long id) {
+  public Client id(Integer id) {
     this.id = id;
     return this;
   }
@@ -47,11 +47,11 @@ public class Client   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
