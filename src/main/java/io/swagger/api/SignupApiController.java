@@ -5,14 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
@@ -30,14 +33,15 @@ public class SignupApiController implements SignupApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
+    @Autowired
+    private ClientRepository clientRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public SignupApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> registerClient(@RequestParam String name, @RequestParam String email,@RequestParam String password, @RequestParam String phone, @RequestParam Boolean isEmailConfirmed) {
+    public @ResponseBody String registerClient(@RequestParam String name,@RequestParam String password, @RequestParam String email, @RequestParam Integer phone, @RequestParam Boolean isEmailConfirmed) {
         // String accept = request.getHeader("Accept");
         Client n = new Client();
         n.setName(name);
@@ -45,7 +49,15 @@ public class SignupApiController implements SignupApi {
         n.setPassword(password);
         n.setPhone(phone);
         n.setIsEmailConfirmed(isEmailConfirmed);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        
+        clientRepository.save(n);
+        return "saved";
+    }
+
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<Client> getAllUsers() {
+      // This returns a JSON or XML with the users
+      return clientRepository.findAll();
     }
 
 }
