@@ -2,13 +2,13 @@ io\swagger\api\SignupApiController.class
 io\swagger\configuration\CustomInstantDeserializer$FromDecimalArguments.class
 io\swagger\configuration\CustomInstantDeserializer$1.class
 io\swagger\configuration\CustomInstantDeserializer$10.class
-io\swagger\configuration\HomeController.class
 io\swagger\api\UserApiController.class
 io\swagger\configuration\CustomInstantDeserializer$8.class
 io\swagger\configuration\CustomInstantDeserializer$4.class
 io\swagger\configuration\JacksonConfiguration.class
 io\swagger\api\ApiResponseMessage.class
 io\swagger\api\ClientApi.class
+io\swagger\api\ClientRepository.class
 io\swagger\api\LoginApiController.class
 io\swagger\model\Admin.class
 io\swagger\api\HelpdeskApi.class

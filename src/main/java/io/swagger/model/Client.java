@@ -6,6 +6,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -15,27 +21,24 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
-
+@Entity
+@Table(name = "client")
 public class Client   {
-  @JsonProperty("id")
-  private Long id = null;
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Integer id;
 
-  @JsonProperty("name")
-  private String name = null;
+  private String name;
 
-  @JsonProperty("password")
-  private String password = null;
+  private String password;
 
-  @JsonProperty("email")
-  private String email = null;
+  private String email;
+  
+  private Integer phone;
 
-  @JsonProperty("phone")
-  private String phone = null;
+  private Boolean isEmailConfirmed;
 
-  @JsonProperty("isEmailConfirmed")
-  private Boolean isEmailConfirmed = false;
-
-  public Client id(Long id) {
+  public Client id(Integer id) {
     this.id = id;
     return this;
   }
@@ -47,45 +50,20 @@ public class Client   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
-  public Client name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-  **/
-  @ApiModelProperty(value = "")
-
 
   public String getName() {
     return name;
   }
-
   public void setName(String name) {
     this.name = name;
   }
-
-  public Client password(String password) {
-    this.password = password;
-    return this;
-  }
-
-  /**
-   * Get password
-   * @return password
-  **/
-  @ApiModelProperty(value = "")
-
 
   public String getPassword() {
     return password;
@@ -95,18 +73,6 @@ public class Client   {
     this.password = password;
   }
 
-  public Client email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  **/
-  @ApiModelProperty(value = "")
-
-
   public String getEmail() {
     return email;
   }
@@ -114,40 +80,14 @@ public class Client   {
   public void setEmail(String email) {
     this.email = email;
   }
-
-  public Client phone(String phone) {
-    this.phone = phone;
-    return this;
-  }
-
-  /**
-   * Get phone
-   * @return phone
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getPhone() {
+  public Integer getPhone() {
     return phone;
   }
 
-  public void setPhone(String phone) {
+  public void setPhone(Integer phone) {
     this.phone = phone;
   }
-
-  public Client isEmailConfirmed(Boolean isEmailConfirmed) {
-    this.isEmailConfirmed = isEmailConfirmed;
-    return this;
-  }
-
-  /**
-   * Get isEmailConfirmed
-   * @return isEmailConfirmed
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Boolean isIsEmailConfirmed() {
+  public Boolean getIsEmailConfirmed() {
     return isEmailConfirmed;
   }
 
