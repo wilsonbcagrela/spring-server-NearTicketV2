@@ -54,7 +54,6 @@ public class SignupApiController implements SignupApi {
         return "saved";
     }
 
-    @GetMapping(path="/all")
     public @ResponseBody Iterable<Client> getAllUsers() {
       // This returns a JSON or XML with the users
       return clientRepository.findAll();

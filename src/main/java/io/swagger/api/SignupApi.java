@@ -9,6 +9,7 @@ import io.swagger.model.Client;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,5 +38,6 @@ public interface SignupApi {
     //     method = RequestMethod.POST)
     @PostMapping(path="/signup")
     @ResponseBody String registerClient(@RequestParam String name, @RequestParam String password,@RequestParam String email, @RequestParam Integer phone, @RequestParam Boolean isEmailConfirmed);
-
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<Client> getAllUsers();
 }
