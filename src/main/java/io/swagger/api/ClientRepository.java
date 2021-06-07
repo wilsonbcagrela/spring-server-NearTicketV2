@@ -10,5 +10,5 @@ import io.swagger.model.Client;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ClientRepository extends CrudRepository<Client, Integer> {
-
+    Client findByEmail(String email);
 }

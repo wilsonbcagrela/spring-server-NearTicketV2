@@ -1,9 +1,11 @@
 package io.swagger.api;
 
+import io.swagger.model.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
@@ -29,16 +32,22 @@ public class LoginApiController implements LoginApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
+    @Autowired
+    private ClientRepository clientRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public LoginApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> login() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public  @ResponseBody String login(@RequestParam String email,@RequestParam String password) {
+        // String accept = request.getHeader("Accept");
+        // return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        Client w = new Client();
+        w.setEmail(email);
+        w.setPassword(password);
+        
+        return "yo";
     }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -34,6 +35,6 @@ public interface LoginApi {
     @RequestMapping(value = "/login",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> login();
+    @ResponseBody String login(@RequestParam String email,@RequestParam String password);
 
 }
