@@ -1,5 +1,7 @@
 package io.swagger.api;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import io.swagger.model.Client;
@@ -10,5 +12,5 @@ import io.swagger.model.Client;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ClientRepository extends CrudRepository<Client, Integer> {
-    Client findByEmail(String email);
+    Optional<Client> findByEmail(String email);
 }
