@@ -1,4 +1,4 @@
-package io.swagger.api;
+package io.swagger.api.Repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
