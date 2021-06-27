@@ -13,7 +13,6 @@ io\swagger\model\Ticket$StatusEnum.class
 io\swagger\configuration\CustomInstantDeserializer$12.class
 io\swagger\api\SignupApi.class
 io\swagger\model\Ticket$GravityEnum.class
-io\swagger\api\LoginApi.class
 io\swagger\api\NotFoundException.class
 io\swagger\configuration\CustomInstantDeserializer$5.class
 io\swagger\configuration\CustomInstantDeserializer$FromIntegerArguments.class
