@@ -6,72 +6,47 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * User
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
+// @Validated
+// @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
-
+@Entity
 public class User   {
-  @JsonProperty("id")
-  private Long id = null;
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Integer id;
 
-  @JsonProperty("userName")
-  private String userName = null;
+  private String userName;
 
-  @JsonProperty("firstName")
-  private String firstName = null;
+  private String firstName;
 
-  @JsonProperty("lastName")
-  private String lastName = null;
+  private String lastName;
 
-  @JsonProperty("email")
-  private String email = null;
+  private String email;
 
-  @JsonProperty("password")
-  private String password = null;
+  private String password;
 
-  @JsonProperty("phone")
-  private String phone = null;
+  private Integer phone;
 
-  @JsonProperty("isEmailConfirmed")
-  private Boolean isEmailConfirmed = false;
+  private Boolean isEmailConfirmed;
 
-  public User id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
-  public User userName(String userName) {
-    this.userName = userName;
-    return this;
-  }
-
-  /**
-   * Get userName
-   * @return userName
-  **/
-  @ApiModelProperty(value = "")
-
 
   public String getUserName() {
     return userName;
@@ -81,18 +56,6 @@ public class User   {
     this.userName = userName;
   }
 
-  public User firstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
-
-  /**
-   * Get firstName
-   * @return firstName
-  **/
-  @ApiModelProperty(value = "")
-
-
   public String getFirstName() {
     return firstName;
   }
@@ -100,18 +63,6 @@ public class User   {
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
-
-  public User lastName(String lastName) {
-    this.lastName = lastName;
-    return this;
-  }
-
-  /**
-   * Get lastName
-   * @return lastName
-  **/
-  @ApiModelProperty(value = "")
-
 
   public String getLastName() {
     return lastName;
@@ -121,18 +72,6 @@ public class User   {
     this.lastName = lastName;
   }
 
-  public User email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-  **/
-  @ApiModelProperty(value = "")
-
-
   public String getEmail() {
     return email;
   }
@@ -140,18 +79,6 @@ public class User   {
   public void setEmail(String email) {
     this.email = email;
   }
-
-  public User password(String password) {
-    this.password = password;
-    return this;
-  }
-
-  /**
-   * Get password
-   * @return password
-  **/
-  @ApiModelProperty(value = "")
-
 
   public String getPassword() {
     return password;
@@ -161,37 +88,13 @@ public class User   {
     this.password = password;
   }
 
-  public User phone(String phone) {
-    this.phone = phone;
-    return this;
-  }
-
-  /**
-   * Get phone
-   * @return phone
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getPhone() {
+  public Integer getPhone() {
     return phone;
   }
 
-  public void setPhone(String phone) {
+  public void setPhone(Integer phone) {
     this.phone = phone;
   }
-
-  public User isEmailConfirmed(Boolean isEmailConfirmed) {
-    this.isEmailConfirmed = isEmailConfirmed;
-    return this;
-  }
-
-  /**
-   * Get isEmailConfirmed
-   * @return isEmailConfirmed
-  **/
-  @ApiModelProperty(value = "")
-
 
   public Boolean isIsEmailConfirmed() {
     return isEmailConfirmed;

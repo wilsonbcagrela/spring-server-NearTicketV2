@@ -3,12 +3,12 @@ package io.swagger.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Admin
@@ -16,10 +16,11 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
-
+@Entity
 public class Admin   {
-  @JsonProperty("id")
-  private Long id = null;
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Integer id = null;
 
   @JsonProperty("userName")
   private String userName = null;
@@ -37,7 +38,7 @@ public class Admin   {
   private String password = null;
 
   @JsonProperty("phone")
-  private String phone = null;
+  private Integer phone = null;
 
   /**
    * Role of the admin
@@ -56,7 +57,6 @@ public class Admin   {
     }
 
     @Override
-    @JsonValue
     public String toString() {
       return String.valueOf(value);
     }
@@ -81,7 +81,7 @@ public class Admin   {
   @JsonProperty("isEmailConfirmed")
   private Boolean isEmailConfirmed = false;
 
-  public Admin id(Long id) {
+  public Admin id(Integer id) {
     this.id = id;
     return this;
   }
@@ -93,11 +93,11 @@ public class Admin   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -201,7 +201,7 @@ public class Admin   {
     this.password = password;
   }
 
-  public Admin phone(String phone) {
+  public Admin phone(Integer phone) {
     this.phone = phone;
     return this;
   }
@@ -213,11 +213,11 @@ public class Admin   {
   @ApiModelProperty(value = "")
 
 
-  public String getPhone() {
+  public Integer getPhone() {
     return phone;
   }
 
-  public void setPhone(String phone) {
+  public void setPhone(Integer phone) {
     this.phone = phone;
   }
 

@@ -6,8 +6,9 @@
 package io.swagger.api;
 
 import io.swagger.annotations.*;
+import io.swagger.model.Admin;
 import io.swagger.model.Client;
-
+import io.swagger.model.User;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,10 @@ public interface LoginApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.POST)
     @GetMapping(path="/login")
-    public Iterable<Client> login(@RequestParam String email, @RequestParam String password);
+    public Iterable<Client> loginClient(@RequestParam String email, @RequestParam String password);
+    @GetMapping(path="/loginUser")
+    public Iterable<User> loginUser(@RequestParam String email, @RequestParam String password);
+    @GetMapping(path="/loginAdmin")
+    public Iterable<Admin> loginAdmin(@RequestParam String email, @RequestParam String password);
 
 }

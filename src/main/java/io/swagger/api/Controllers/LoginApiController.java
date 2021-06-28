@@ -1,9 +1,14 @@
 package io.swagger.api.Controllers;
+import io.swagger.model.Admin;
 import io.swagger.model.Client;
+import io.swagger.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.api.LoginApi;
+import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
+import io.swagger.api.Repositories.UserRepository;
 
+// import org.apache.tomcat.jni.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +34,10 @@ public class LoginApiController implements LoginApi {
     private final HttpServletRequest request;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private AdminRepository adminRepository;
 
     @org.springframework.beans.factory.annotation.Autowired
     public LoginApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -36,9 +45,17 @@ public class LoginApiController implements LoginApi {
         this.request = request;
     }
 
-    public @ResponseBody Iterable<Client> login(@RequestParam String email, @RequestParam String password) {
+    public @ResponseBody Iterable<Client> loginClient(@RequestParam String email, @RequestParam String password) {
         
         return clientRepository.findClientByEmailAndPassword(email, password);
+    }
+    public @ResponseBody Iterable<User> loginUser(@RequestParam String email, @RequestParam String password) {
+        
+        return userRepository.findUserByEmailAndPassword(email, password);
+    }
+    public @ResponseBody Iterable<Admin> loginAdmin(@RequestParam String email, @RequestParam String password) {
+        
+        return adminRepository.findAdminByEmailAndPassword(email, password);
     }
 
 }
