@@ -34,6 +34,5 @@ public interface SignupApi {
     //     method = RequestMethod.POST)
     @PostMapping(path="/signup")
     @ResponseBody String registerClient(@RequestParam String name, @RequestParam String password,@RequestParam String email, @RequestParam Integer phone, @RequestParam Boolean isEmailConfirmed);
-    @GetMapping(path="/all")
-    public @ResponseBody Iterable<Client> getAllUsers();
+
 }

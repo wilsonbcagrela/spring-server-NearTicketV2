@@ -1,8 +1,6 @@
 package io.swagger.api.Repositories;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,4 +20,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value ="SELECT a FROM User a, Client b WHERE a.userName =?1 AND b.id = a.Client_id AND b.id = ?2")
     @ResponseBody Iterable<User> findUserByUserName(@RequestParam String userName, @RequestParam Integer Client_id);
 
+    @Query(value ="SELECT a FROM User a, Client b WHERE b.id = a.Client_id AND b.id = ?1")
+    @ResponseBody Iterable<User> findAllUserOfClient(@RequestParam Integer Client_id);
 }

@@ -102,15 +102,16 @@ public interface ClientApi {
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsersClient", notes = "Gets a list of all users", response = User.class, tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = User.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/client/users",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<User> getUsersClient();
-
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/client/users",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    //gets all users of a specific client
+    @GetMapping(path="/client/users")
+    public Iterable<User> getUsersClient(@RequestParam Integer Client_id);
 
     @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
     @ApiResponses(value = { 

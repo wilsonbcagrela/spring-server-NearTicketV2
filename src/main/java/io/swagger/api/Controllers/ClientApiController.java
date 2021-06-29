@@ -85,28 +85,9 @@ public class ClientApiController implements ClientApi {
         return userRepository.findUserByUserName(username, Client_id);
 
     }
-
-    public ResponseEntity<User> getUsersClient() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("<User>  <id>123456789</id>  <userName>aeiou</userName>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <isEmailConfirmed>true</isEmailConfirmed></User>", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"userName\" : \"userName\",  \"email\" : \"email\",  \"isEmailConfirmed\" : false}", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<User>(HttpStatus.NOT_IMPLEMENTED);
+    public @ResponseBody Iterable<User> getUsersClient(@RequestParam Integer Client_id) {
+        // This returns a JSON or XML with the users
+        return userRepository.findAllUserOfClient(Client_id);
     }
 
     public ResponseEntity<Void> logoutClient() {
