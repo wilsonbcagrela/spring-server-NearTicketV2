@@ -5,14 +5,17 @@ import io.swagger.model.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.UserApi;
+import io.swagger.api.Repositories.ProjectRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -29,34 +32,21 @@ public class UserApiController implements UserApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
+    @Autowired
+    private ProjectRepository projectRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Project> addProject(@ApiParam(value = "Project been created" ,required=true )  @Valid @RequestBody Project body) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<Project>(objectMapper.readValue("<project>  <id>123456789</id>  <name>my project</name>  <description>This projects is about collecting tickets</description></project>", Project.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description) {
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Project>(objectMapper.readValue("{  \"name\" : \"my project\",  \"description\" : \"This projects is about collecting tickets\",  \"id\" : 0}", Project.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Project>(HttpStatus.NOT_IMPLEMENTED);
+        Project project = new Project();
+        project.setName(name);
+        project.setDescription(description);
+        projectRepository.save(project);
+        return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
 
     public ResponseEntity<Ticket> addTicket(@ApiParam(value = "Ticket been placed" ,required=true )  @Valid @RequestBody Ticket body) {
