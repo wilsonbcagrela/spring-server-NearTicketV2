@@ -18,4 +18,8 @@ import io.swagger.model.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value ="SELECT a FROM User a WHERE a.email =?1 AND a.password = ?2")
     @ResponseBody Iterable<User> findUserByEmailAndPassword(@RequestParam String email,@RequestParam String password);
+
+    @Query(value ="SELECT a FROM User a, Client b WHERE a.userName =?1 AND b.id = a.Client_id AND b.id = ?2")
+    @ResponseBody Iterable<User> findUserByUserName(@RequestParam String userName, @RequestParam Integer Client_id);
+
 }

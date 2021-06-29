@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +52,7 @@ public class ClientApiController implements ClientApi {
         user.setClient_id(Client_id);
 
         userRepository.save(user);
-        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     public ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body) {
@@ -80,27 +80,10 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<User> getUserByName(@ApiParam(value = "The name that needs to be fetched. Use user1 for testing. ",required=true) @PathVariable("username") String username) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("<User>  <id>123456789</id>  <userName>aeiou</userName>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <isEmailConfirmed>true</isEmailConfirmed></User>", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public  @ResponseBody Iterable<User> getUserByName(@RequestParam String username, @RequestParam Integer Client_id) {
+        
+        return userRepository.findUserByUserName(username, Client_id);
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"userName\" : \"userName\",  \"email\" : \"email\",  \"isEmailConfirmed\" : false}", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<User>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<User> getUsersClient() {

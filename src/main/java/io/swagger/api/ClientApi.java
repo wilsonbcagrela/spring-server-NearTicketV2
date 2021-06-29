@@ -5,11 +5,13 @@
  */
 package io.swagger.api;
 
+import java.io.IOException;
 import java.util.List;
 import io.swagger.model.User;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,14 +90,15 @@ public interface ClientApi {
 
 
     @ApiOperation(value = "Get user by user name", nickname = "getUserByName", notes = "", response = User.class, tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = User.class),
-        @ApiResponse(code = 400, message = "Invalid username supplied"),
-        @ApiResponse(code = 404, message = "User not found") })
-    @RequestMapping(value = "/client/user/{username}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<User> getUserByName(@ApiParam(value = "The name that needs to be fetched. Use user1 for testing. ",required=true) @PathVariable("username") String username);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
+    //     @ApiResponse(code = 400, message = "Invalid username supplied"),
+    //     @ApiResponse(code = 404, message = "User not found") })
+    // @RequestMapping(value = "/client/user/{username}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/client/user/{username}")
+    Iterable<User> getUserByName(@RequestParam String username, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsersClient", notes = "Gets a list of all users", response = User.class, tags={ "client", })
