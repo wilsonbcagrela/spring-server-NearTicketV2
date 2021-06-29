@@ -70,7 +70,7 @@ public class User   {
   public Set<Project> getProject(){
     return project;
   }
-  public void getProject(Set<Project> project ){
+  public void setProject(Set<Project> project ){
     this.project = project;
   }
 
