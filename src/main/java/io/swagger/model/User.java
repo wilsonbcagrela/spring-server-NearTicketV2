@@ -1,16 +1,24 @@
 package io.swagger.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -41,7 +49,17 @@ public class User   {
   private Boolean isEmailConfirmed;
 
   private Integer Client_id;
-
+  
+  @ManyToMany
+  @JoinTable(
+    name = "project_has_user",
+    joinColumns = {
+      @JoinColumn(name = "User_id")},
+    inverseJoinColumns = {
+      @JoinColumn(name = "Project_id")}
+  )
+  private Set<Project> project = new HashSet<>(); 
+  
   public Integer getId() {
     return id;
   }
@@ -49,7 +67,13 @@ public class User   {
   public void setId(Integer id) {
     this.id = id;
   }
-  
+  public Set<Project> getProject(){
+    return project;
+  }
+  public void getProject(Set<Project> project ){
+    this.project = project;
+  }
+
   public Integer getClient_id() {
     return Client_id;
   }
