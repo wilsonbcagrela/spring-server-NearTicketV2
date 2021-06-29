@@ -5,9 +5,11 @@ import io.swagger.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.ClientApi;
+import io.swagger.api.Repositories.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,17 +32,27 @@ public class ClientApiController implements ClientApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
+    @Autowired
+    private UserRepository userRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public ClientApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> createUser(@RequestParam String name, @RequestParam String email) {
-        // String accept = request.getHeader("Accept");
+    public ResponseEntity<Void> createUser(@RequestParam String userName, @RequestParam String email,@RequestParam String password, @RequestParam Integer phone,  @RequestParam Integer Client_id, @RequestParam String firstName, @RequestParam String lastName) {
+        User user = new User();
+        user.setUserName(userName);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPassword(password);
+        user.setIsEmailConfirmed(false);
+        user.setPhone(phone);
+        user.setClient_id(Client_id);
 
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        userRepository.save(user);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
     public ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body) {

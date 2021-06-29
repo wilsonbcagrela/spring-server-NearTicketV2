@@ -40,6 +40,8 @@ public class User   {
 
   private Boolean isEmailConfirmed;
 
+  private Integer Client_id;
+
   public Integer getId() {
     return id;
   }
@@ -47,7 +49,14 @@ public class User   {
   public void setId(Integer id) {
     this.id = id;
   }
+  
+  public Integer getClient_id() {
+    return Client_id;
+  }
 
+  public void setClient_id(Integer Client_id) {
+    this.Client_id = Client_id;
+  }
   public String getUserName() {
     return userName;
   }

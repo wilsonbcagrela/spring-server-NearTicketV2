@@ -11,6 +11,7 @@ import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,13 @@ import javax.validation.Valid;
 public interface ClientApi {
 
     @ApiOperation(value = "Create user", nickname = "createUser", notes = "This can only be done by the logged in user.", tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/client/user",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> createUser(@RequestParam String name, @RequestParam String email);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/client/user",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    @PostMapping(path="/client/user")
+    ResponseEntity<Void> createUser(@RequestParam String userName, @RequestParam String email,@RequestParam String password, @RequestParam Integer phone,  @RequestParam Integer Client_id, @RequestParam String firstName, @RequestParam String lastName);
 
 
     @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags={ "client", })
