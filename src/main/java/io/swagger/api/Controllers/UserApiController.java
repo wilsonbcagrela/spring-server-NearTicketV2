@@ -55,7 +55,7 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status,@RequestParam boolean isRequest, @RequestParam boolean isIssue, @RequestParam Integer Project_id) {
+    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status, @RequestParam Integer Project_id) {
 
         Ticket ticket = new Ticket();
         ticket.setName(name);
@@ -65,8 +65,8 @@ public class UserApiController implements UserApi {
         ticket.setGravity(gravity);
         ticket.setSupervisor(supervisor);
         ticket.setStatus(status);
-        ticket.setIsRequest(isRequest);
-        ticket.setIsIssue(isIssue);
+        ticket.setIsRequest(false);
+        ticket.setIsIssue(false);
         ticketRepository.save(ticket);
         return new ResponseEntity<Ticket>(HttpStatus.CREATED);
     }
