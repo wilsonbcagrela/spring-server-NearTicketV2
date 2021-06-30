@@ -7,19 +7,25 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * Ticket
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
+// @Validated
+// @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
-
+@Entity
 public class Ticket   {
-  @JsonProperty("id")
-  private Long id = null;
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Integer id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -114,7 +120,7 @@ public class Ticket   {
   @JsonProperty("isIssue")
   private Boolean isIssue = false;
 
-  public Ticket id(Long id) {
+  public Ticket id(Integer id) {
     this.id = id;
     return this;
   }
@@ -126,11 +132,11 @@ public class Ticket   {
   @ApiModelProperty(value = "")
 
 
-  public Long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

@@ -7,6 +7,8 @@ package io.swagger.api;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.GravityEnum;
+import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,17 +40,18 @@ public interface UserApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.POST)
     @PostMapping(path="/user/project")
-        ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description);
+    ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description);
 
 
     @ApiOperation(value = "Add a ticket to a project", nickname = "addTicket", notes = "Here you can add a ticket to an a existing project", response = Ticket.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ticket") })
-    @RequestMapping(value = "/user/project/ticket",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Ticket> addTicket(@ApiParam(value = "Ticket been placed" ,required=true )  @Valid @RequestBody Ticket body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ticket") })
+    // @RequestMapping(value = "/user/project/ticket",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    @PostMapping(path="/user/project/ticket")
+    ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status,@RequestParam boolean isRequest, @RequestParam boolean isIssue, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicket", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "user", })
