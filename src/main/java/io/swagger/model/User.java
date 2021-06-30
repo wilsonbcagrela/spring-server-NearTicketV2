@@ -52,7 +52,7 @@ public class User   {
   
   @ManyToMany
   @JoinTable(
-    name = "project_has_user",
+    name = "user_has_project",
     joinColumns = {
       @JoinColumn(name = "User_id")},
     inverseJoinColumns = {
