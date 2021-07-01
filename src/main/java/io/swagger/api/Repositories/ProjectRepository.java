@@ -16,4 +16,6 @@ import io.swagger.model.Project;
 // CRUD refers Create, Read, Update, Delete
 
 public interface ProjectRepository extends CrudRepository<Project, Integer> {
+
+    
 }

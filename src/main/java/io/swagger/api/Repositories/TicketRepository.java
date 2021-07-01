@@ -17,6 +17,6 @@ import io.swagger.model.Ticket;
 
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
-    // @Query(value ="DELETE a FROM Ticket a WHERE a.id =?1")
-    // void deleteTicket(@RequestParam Integer ticketId);
+    @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1")
+    @ResponseBody Iterable<Ticket> findTicketsOfAProject(@RequestParam Integer Project_id);
 }

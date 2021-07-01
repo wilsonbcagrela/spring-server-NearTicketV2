@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -78,9 +79,10 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<Void> getProjects() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public @ResponseBody Iterable<Project> getProjects() {
+        
+        
+        return projectRepository.findAll();
     }
 
     public ResponseEntity<Ticket> getTicketById(@Min(1L) @Max(10L) @ApiParam(value = "ID of ticket that needs to be fetched",required=true) @PathVariable("ticketId") Long ticketId) {
@@ -106,9 +108,9 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Ticket>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> getTickets() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public @ResponseBody Iterable<Ticket> getTickets(@RequestParam Integer Project_id) {
+        
+        return ticketRepository.findTicketsOfAProject(Project_id);
     }
 
     public ResponseEntity<Void> logoutUser() {
