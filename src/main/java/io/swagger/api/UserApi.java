@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,15 +114,16 @@ public interface UserApi {
 
 
     @ApiOperation(value = "Update an existing ticket", nickname = "updateTicket", notes = "", response = Ticket.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "ticket updated successfully", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found"),
-        @ApiResponse(code = 405, message = "Validation exception") })
-    @RequestMapping(value = "/user/project/ticket/{ticketId}",
-        produces = { "application/json", "application/xml" }, 
-        consumes = { "application/json", "application/xml" },
-        method = RequestMethod.PUT)
-    ResponseEntity<Ticket> updateTicket(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be updated",required=true) @PathVariable("ticketId") Long ticketId);
-
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "ticket updated successfully", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found"),
+    //     @ApiResponse(code = 405, message = "Validation exception") })
+    // @RequestMapping(value = "/user/project/ticket/{ticketId}",
+    //     produces = { "application/json", "application/xml" }, 
+    //     consumes = { "application/json", "application/xml" },
+    //     method = RequestMethod.PUT)
+    @PutMapping(path="/user/project/ticket/{ticketId}")
+    ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam String name);
+        //, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status
 }
