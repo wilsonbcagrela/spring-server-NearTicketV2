@@ -7,10 +7,13 @@ package io.swagger.api;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.GravityEnum;
+import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,23 +33,25 @@ import java.util.List;
 public interface UserApi {
 
     @ApiOperation(value = "Add a project", nickname = "addProject", notes = "Here you can create a new project", response = Project.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Project.class),
-        @ApiResponse(code = 400, message = "Invalid ticket") })
-    @RequestMapping(value = "/user/project",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Project> addProject(@ApiParam(value = "Project been created" ,required=true )  @Valid @RequestBody Project body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Project.class),
+    //     @ApiResponse(code = 400, message = "Invalid ticket") })
+    // @RequestMapping(value = "/user/project",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    @PostMapping(path="/user/project")
+    ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description);
 
 
     @ApiOperation(value = "Add a ticket to a project", nickname = "addTicket", notes = "Here you can add a ticket to an a existing project", response = Ticket.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ticket") })
-    @RequestMapping(value = "/user/project/ticket",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Ticket> addTicket(@ApiParam(value = "Ticket been placed" ,required=true )  @Valid @RequestBody Ticket body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ticket") })
+    // @RequestMapping(value = "/user/project/ticket",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    @PostMapping(path="/user/project/ticket")
+    ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicket", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "user", })

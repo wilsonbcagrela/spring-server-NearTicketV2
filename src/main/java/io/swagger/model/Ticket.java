@@ -7,35 +7,37 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
  * Ticket
  */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
+// @Validated
+// @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
-
+@Entity
 public class Ticket   {
-  @JsonProperty("id")
-  private Long id = null;
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private Integer id = null;
 
-  @JsonProperty("name")
+
   private String name = null;
 
-  @JsonProperty("description")
   private String description = null;
 
-  @JsonProperty("deadLine")
   private String deadLine = null;
 
-  @JsonProperty("urgency")
   private Boolean urgency = null;
 
-  /**
-   * ticket gravity
-   */
+  private Integer Project_id;
+
   public enum GravityEnum {
     MILD("mild"),
     
@@ -48,33 +50,30 @@ public class Ticket   {
     GravityEnum(String value) {
       this.value = value;
     }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
+    public String getValue(){
+      return value;
     }
+    // @Override
+    // @JsonValue
+    // public String toString() {
+    //   return String.valueOf(value);
+    // }
 
-    @JsonCreator
-    public static GravityEnum fromValue(String text) {
-      for (GravityEnum b : GravityEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
+    // @JsonCreator
+    // public static GravityEnum fromValue(String text) {
+    //   for (GravityEnum b : GravityEnum.values()) {
+    //     if (String.valueOf(b.value).equals(text)) {
+    //       return b;
+    //     }
+    //   }
+    //   return null;
+    // }
   }
 
-  @JsonProperty("gravity")
   private GravityEnum gravity = null;
 
-  @JsonProperty("supervisor")
   private String supervisor = null;
 
-  /**
-   * ticket status
-   */
   public enum StatusEnum {
     NOT_INITIATED("not initiated"),
     
@@ -87,22 +86,24 @@ public class Ticket   {
     StatusEnum(String value) {
       this.value = value;
     }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
+    public String getValue(){
+      return value;
     }
+    // @Override
+    // @JsonValue
+    // public String toString() {
+    //   return String.valueOf(value);
+    // }
 
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
+    // @JsonCreator
+    // public static StatusEnum fromValue(String text) {
+    //   for (StatusEnum b : StatusEnum.values()) {
+    //     if (String.valueOf(b.value).equals(text)) {
+    //       return b;
+    //     }
+    //   }
+    //   return null;
+    // }
   }
 
   @JsonProperty("status")
@@ -114,37 +115,38 @@ public class Ticket   {
   @JsonProperty("isIssue")
   private Boolean isIssue = false;
 
-  public Ticket id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(value = "")
+  // public Ticket id(Integer id) {
+  //   this.id = id;
+  //   return this;
+  // }
 
 
-  public Long getId() {
+
+  public Integer getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
-  public Ticket name(String name) {
-    this.name = name;
-    return this;
+  public Integer getProject_id() {
+    return Project_id;
   }
+
+  public void setProject_id(Integer Project_id) {
+    this.Project_id = Project_id;
+  }
+  // public Ticket name(String name) {
+  //   this.name = name;
+  //   return this;
+  // }
 
   /**
    * Get name
    * @return name
-  **/
-  @ApiModelProperty(example = "issue with a part of the code", required = true, value = "")
-  @NotNull
+  // **/
+  // @ApiModelProperty(example = "issue with a part of the code", required = true, value = "")
+  // @NotNull
 
 
   public String getName() {
@@ -155,16 +157,16 @@ public class Ticket   {
     this.name = name;
   }
 
-  public Ticket description(String description) {
-    this.description = description;
-    return this;
-  }
+  // public Ticket description(String description) {
+  //   this.description = description;
+  //   return this;
+  // }
 
   /**
    * Get description
    * @return description
   **/
-  @ApiModelProperty(example = "explains in detail what the issue is", value = "")
+  // @ApiModelProperty(example = "explains in detail what the issue is", value = "")
 
 
   public String getDescription() {
@@ -175,16 +177,16 @@ public class Ticket   {
     this.description = description;
   }
 
-  public Ticket deadLine(String deadLine) {
-    this.deadLine = deadLine;
-    return this;
-  }
+  // public Ticket deadLine(String deadLine) {
+  //   this.deadLine = deadLine;
+  //   return this;
+  // }
 
   /**
    * Get deadLine
    * @return deadLine
-  **/
-  @ApiModelProperty(example = "deadline to fix the issue", value = "")
+  // **/
+  // @ApiModelProperty(example = "deadline to fix the issue", value = "")
 
 
   public String getDeadLine() {
@@ -195,16 +197,16 @@ public class Ticket   {
     this.deadLine = deadLine;
   }
 
-  public Ticket urgency(Boolean urgency) {
-    this.urgency = urgency;
-    return this;
-  }
+  // public Ticket urgency(Boolean urgency) {
+  //   this.urgency = urgency;
+  //   return this;
+  // }
 
   /**
    * Get urgency
    * @return urgency
   **/
-  @ApiModelProperty(value = "")
+  // @ApiModelProperty(value = "")
 
 
   public Boolean isUrgency() {
