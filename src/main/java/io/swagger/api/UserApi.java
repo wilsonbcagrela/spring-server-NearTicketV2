@@ -12,6 +12,7 @@ import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,14 +56,15 @@ public interface UserApi {
 
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicket", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/user/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteTicket(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/user/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.DELETE)
+    @DeleteMapping("/user/project/ticket/{ticketId}")
+    ResponseEntity<Void> deleteTicket(@RequestParam Integer id);
 
 
     @ApiOperation(value = "Returns all projects associated with the user", nickname = "getProjects", notes = "Returns projects", tags={ "user", })

@@ -72,9 +72,10 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Ticket>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> deleteTicket(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteTicket(@RequestParam Integer id) {
+        
+        ticketRepository.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
     public ResponseEntity<Void> getProjects() {

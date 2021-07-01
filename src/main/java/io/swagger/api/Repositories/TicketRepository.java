@@ -16,4 +16,7 @@ import io.swagger.model.Ticket;
 // CRUD refers Create, Read, Update, Delete
 
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
+
+    // @Query(value ="DELETE a FROM Ticket a WHERE a.id =?1")
+    // void deleteTicket(@RequestParam Integer ticketId);
 }
