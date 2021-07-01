@@ -39,9 +39,9 @@ public class Project   {
     this.id = id;
     return this;
   }
-
-  @ManyToMany(mappedBy = "project", fetch = FetchType.LAZY)
-  private Set<User> user = new HashSet<>();
+  //-----------------------many to many -----------------------------------
+  // @ManyToMany(mappedBy = "project", fetch = FetchType.LAZY)
+  // private Set<User> user = new HashSet<>();
 
   public Integer getId() {
     return id;
