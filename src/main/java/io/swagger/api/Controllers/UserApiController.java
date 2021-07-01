@@ -62,11 +62,12 @@ public class UserApiController implements UserApi {
         ticket.setDescription(description);
         ticket.setDeadLine(deadLine);
         ticket.setUrgency(urgency);
-        ticket.setGravity(gravity);
+        ticket.gravity(gravity);
         ticket.setSupervisor(supervisor);
-        ticket.setStatus(status);
+        ticket.status(status);
         ticket.setIsRequest(false);
         ticket.setIsIssue(false);
+        ticket.setProject_id(Project_id);
         ticketRepository.save(ticket);
         return new ResponseEntity<Ticket>(HttpStatus.CREATED);
     }
