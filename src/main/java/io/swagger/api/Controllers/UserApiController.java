@@ -101,9 +101,9 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam String name) {
+    public ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status) {
         
-        ticketRepository.UpdateTicketsById(name, id, Project_id);
+        ticketRepository.UpdateTicketsById(name,description, urgency, supervisor, deadLine, gravity,status, id, Project_id);
         return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
     }
     //description, urgency, supervisor, deadLine, gravity,status,
