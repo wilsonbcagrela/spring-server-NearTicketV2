@@ -12,6 +12,7 @@ import io.swagger.annotations.*;
 import io.swagger.api.HelpdeskApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
+import io.swagger.api.Repositories.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,8 @@ public class HelpdeskApiController implements HelpdeskApi {
     private AdminRepository adminRepository;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private UserRepository userRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public HelpdeskApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -117,27 +120,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Ticket>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<User> getUsers() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("<User>  <id>123456789</id>  <userName>aeiou</userName>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <isEmailConfirmed>true</isEmailConfirmed></User>", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public @ResponseBody Iterable<User> getUsers(@RequestParam Integer Client_id) {
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<User>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"phone\" : \"phone\",  \"id\" : 0,  \"userName\" : \"userName\",  \"email\" : \"email\",  \"isEmailConfirmed\" : false}", User.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<User>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<User>(HttpStatus.NOT_IMPLEMENTED);
+        return userRepository.findAllUserOfClient(Client_id);
     }
 
     public ResponseEntity<Void> logoutHelpdesk() {
@@ -149,7 +134,7 @@ public class HelpdeskApiController implements HelpdeskApi {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
-    public ResponseEntity<Admin> addTicket(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role) {
+    public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role) {
         Admin admin = new Admin();
         admin.setUserName(userName);
         admin.setFirstName(firstName);

@@ -102,14 +102,15 @@ public interface HelpdeskApi {
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsers", notes = "Gets a list of all clients", response = User.class, tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = User.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/helpdesk/users",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<User> getUsers();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/helpdesk/users",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/helpdesk/users")
+    @ResponseBody Iterable<User> getUsers(@RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Logs out current logged in helpdesk session", nickname = "logoutHelpdesk", notes = "", tags={ "helpdesk", })
@@ -132,5 +133,5 @@ public interface HelpdeskApi {
     ResponseEntity<Void> updateHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
     
     @PostMapping(path="/helpdesk/createAdmin")
-    public ResponseEntity<Admin> addTicket(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
+    public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
 }
