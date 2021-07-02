@@ -55,21 +55,23 @@ public class Admin   {
     RoleEnum(String value) {
       this.value = value;
     }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
+    public String getValue(){
+      return value;
     }
+    // @Override
+    // public String toString() {
+    //   return String.valueOf(value);
+    // }
 
-    @JsonCreator
-    public static RoleEnum fromValue(String text) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
+    // @JsonCreator
+    // public static RoleEnum fromValue(String text) {
+    //   for (RoleEnum b : RoleEnum.values()) {
+    //     if (String.valueOf(b.value).equals(text)) {
+    //       return b;
+    //     }
+    //   }
+    //   return null;
+    // }
   }
 
   @JsonProperty("role")

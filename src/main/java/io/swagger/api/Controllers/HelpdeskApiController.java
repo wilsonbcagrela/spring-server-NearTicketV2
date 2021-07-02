@@ -5,17 +5,22 @@ import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
+import io.swagger.model.Admin.RoleEnum;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.HelpdeskApi;
+import io.swagger.api.Repositories.AdminRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -33,6 +38,9 @@ public class HelpdeskApiController implements HelpdeskApi {
 
     private final HttpServletRequest request;
 
+    @Autowired
+    private AdminRepository adminRepository;
+    
     @org.springframework.beans.factory.annotation.Autowired
     public HelpdeskApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -172,6 +180,20 @@ public class HelpdeskApiController implements HelpdeskApi {
     public ResponseEntity<Void> updateHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    }
+    public ResponseEntity<Admin> addTicket(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role) {
+        Admin admin = new Admin();
+        admin.setUserName(userName);
+        admin.setFirstName(firstName);
+        admin.setLastName(lastName);
+        admin.setEmail(email);
+        admin.setPassword(password);
+        admin.setPhone(phone);
+        admin.setIsAdmin(true);
+        admin.setIsEmailConfirmed(false);
+        admin.role(role);
+        adminRepository.save(admin);
+        return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
 
 }

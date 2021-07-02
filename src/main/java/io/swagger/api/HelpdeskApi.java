@@ -10,14 +10,16 @@ import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
+import io.swagger.model.Admin.RoleEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -124,5 +126,7 @@ public interface HelpdeskApi {
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.GET)
     ResponseEntity<Void> updateHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
-
+    
+    @PostMapping(path="/helpdesk/createAdmin")
+    public ResponseEntity<Admin> addTicket(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
 }
