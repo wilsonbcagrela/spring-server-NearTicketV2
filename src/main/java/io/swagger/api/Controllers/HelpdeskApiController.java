@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.HelpdeskApi;
 import io.swagger.api.Repositories.AdminRepository;
+import io.swagger.api.Repositories.ClientRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,8 @@ public class HelpdeskApiController implements HelpdeskApi {
 
     @Autowired
     private AdminRepository adminRepository;
-    
+    @Autowired
+    private ClientRepository clientRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public HelpdeskApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -58,27 +60,10 @@ public class HelpdeskApiController implements HelpdeskApi {
         return adminRepository.findAll();
     }
 
-    public ResponseEntity<Client> getClients() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<Client>(objectMapper.readValue("<Client>  <id>123456789</id>  <name>aeiou</name>  <password>aeiou</password>  <email>aeiou</email>  <phone>aeiou</phone>  <isEmailConfirmed>true</isEmailConfirmed></Client>", Client.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<Client>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public @ResponseBody Iterable<Client> getClients() {
+        
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Client>(objectMapper.readValue("{  \"password\" : \"password\",  \"phone\" : \"phone\",  \"name\" : \"name\",  \"id\" : 0,  \"email\" : \"email\",  \"isEmailConfirmed\" : false}", Client.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Client>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Client>(HttpStatus.NOT_IMPLEMENTED);
+        return clientRepository.findAll();
     }
 
     public ResponseEntity<Project> getProjectsHelpdesk() {

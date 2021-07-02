@@ -14,6 +14,7 @@ import io.swagger.model.Admin.RoleEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,19 +52,20 @@ public interface HelpdeskApi {
     // @RequestMapping(value = "/helpdesk/admins",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
-    @PostMapping(path="/helpdesk/admins")
+    @GetMapping(path="/helpdesk/admins")
     public @ResponseBody Iterable<Admin> getAdmins();
 
 
     @ApiOperation(value = "Get all clients", nickname = "getClients", notes = "Gets a list of all clients", response = Client.class, tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Client.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/helpdesk/clients",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Client> getClients();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Client.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/helpdesk/clients",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/helpdesk/clients")
+    @ResponseBody Iterable<Client> getClients();
 
 
     @ApiOperation(value = "Get all projects", nickname = "getProjectsHelpdesk", notes = "Gets a list of all the projects", response = Project.class, tags={ "helpdesk", })
