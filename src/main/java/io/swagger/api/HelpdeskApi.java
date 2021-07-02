@@ -91,14 +91,15 @@ public interface HelpdeskApi {
 
 
     @ApiOperation(value = "Get tickets", nickname = "getTicketsHelpdesk", notes = "Gets a list of all the ticket", response = Ticket.class, tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/helpdesk/project/tickets",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Ticket> getTicketsHelpdesk();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/helpdesk/project/tickets",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/helpdesk/project/tickets")
+    @ResponseBody Iterable<Ticket> getTicketsHelpdesk(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsers", notes = "Gets a list of all clients", response = User.class, tags={ "helpdesk", })
