@@ -104,6 +104,7 @@ public class Admin   {
   )
   private Set<Project> projects = new HashSet<>();
   
+  @JsonCreator
   public Set<Project> getProjects(){
     return projects;
   }
