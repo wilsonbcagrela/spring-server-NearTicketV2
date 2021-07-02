@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -43,14 +44,15 @@ public interface HelpdeskApi {
 
 
     @ApiOperation(value = "Get all users that are admins", nickname = "getAdmins", notes = "Gets a list of all admins users", response = Admin.class, tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Admin.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/helpdesk/admins",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Admin> getAdmins();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Admin.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/helpdesk/admins",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @PostMapping(path="/helpdesk/admins")
+    public @ResponseBody Iterable<Admin> getAdmins();
 
 
     @ApiOperation(value = "Get all clients", nickname = "getClients", notes = "Gets a list of all clients", response = Client.class, tags={ "helpdesk", })

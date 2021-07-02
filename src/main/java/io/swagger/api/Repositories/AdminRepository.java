@@ -18,4 +18,5 @@ import io.swagger.model.Admin;
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
     @Query(value ="SELECT a FROM Admin a WHERE a.email =?1 AND a.password = ?2")
     @ResponseBody Iterable<Admin> findAdminByEmailAndPassword(@RequestParam String email,@RequestParam String password);
+
 }

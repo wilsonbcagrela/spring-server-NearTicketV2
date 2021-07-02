@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
@@ -52,27 +53,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Admin> getAdmins() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<Admin>(objectMapper.readValue("<Admin>  <id>123456789</id>  <userName>aeiou</userName>  <firstName>aeiou</firstName>  <lastName>aeiou</lastName>  <email>aeiou</email>  <password>aeiou</password>  <phone>aeiou</phone>  <role>aeiou</role>  <isAdmin>true</isAdmin>  <isEmailConfirmed>true</isEmailConfirmed></Admin>", Admin.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<Admin>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public @ResponseBody Iterable<Admin> getAdmins() {
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Admin>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"password\" : \"password\",  \"role\" : \"technician\",  \"phone\" : \"phone\",  \"id\" : 0,  \"isAdmin\" : false,  \"userName\" : \"userName\",  \"email\" : \"email\",  \"isEmailConfirmed\" : false}", Admin.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Admin>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Admin>(HttpStatus.NOT_IMPLEMENTED);
+        return adminRepository.findAll();
     }
 
     public ResponseEntity<Client> getClients() {
