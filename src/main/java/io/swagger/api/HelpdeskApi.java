@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -124,14 +125,15 @@ public interface HelpdeskApi {
 
 
     @ApiOperation(value = "find ticket by ID", nickname = "updateHelpdesk", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 400, message = "Invalid ticket supplied"),
-        @ApiResponse(code = 404, message = "Ticket not found") })
-    @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> updateHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 400, message = "Invalid ticket supplied"),
+    //     @ApiResponse(code = 404, message = "Ticket not found") })
+    // @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @PutMapping(path="/helpdesk/project/ticket/{ticketId}")
+    ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id);
     
     @PostMapping(path="/helpdesk/createAdmin")
     public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
