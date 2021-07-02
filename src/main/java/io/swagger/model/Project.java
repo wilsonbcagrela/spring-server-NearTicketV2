@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,12 @@ public class Project   {
   //-----------------------many to many -----------------------------------
   // @ManyToMany(mappedBy = "project", fetch = FetchType.LAZY)
   // private Set<User> user = new HashSet<>();
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects" )
+  private Set<Admin> admin = new HashSet<>();
 
+  public Set<Admin> getAdmin(){
+    return admin;
+  }
   public Integer getId() {
     return id;
   }

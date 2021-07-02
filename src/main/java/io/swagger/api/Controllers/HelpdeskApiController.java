@@ -12,6 +12,7 @@ import io.swagger.annotations.*;
 import io.swagger.api.HelpdeskApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
+import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
 
@@ -50,6 +51,8 @@ public class HelpdeskApiController implements HelpdeskApi {
     private UserRepository userRepository;
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public HelpdeskApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -135,4 +138,17 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
 
+    public void manytomanytest(@RequestParam Integer id){
+        
+        Project project = new Project();
+        project.setName("name");
+        project.setDescription("description");
+        
+
+        project.getAdmin().add(adminRepository.findAdminById(id));
+        adminRepository.findAdminById(id).getProjects().add(project);
+
+        // adminRepository.save(admin);
+        projectRepository.save(project);
+    }
 }

@@ -137,4 +137,7 @@ public interface HelpdeskApi {
     
     @PostMapping(path="/helpdesk/createAdmin")
     public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
+    
+    @PostMapping(path="/helpdesk/teste")
+    void manytomanytest(@RequestParam Integer id);
 }

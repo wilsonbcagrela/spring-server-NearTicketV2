@@ -1,14 +1,25 @@
 package io.swagger.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModelProperty;
+
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  * Admin
@@ -82,6 +93,21 @@ public class Admin   {
 
   @JsonProperty("isEmailConfirmed")
   private Boolean isEmailConfirmed = false;
+
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinTable(name = "admin_has_project", 
+    joinColumns = {
+      @JoinColumn(name = "Admin_id")},
+    inverseJoinColumns = {
+      @JoinColumn (name = "Project_id")
+    }
+  )
+  private Set<Project> projects = new HashSet<>();
+  
+  public Set<Project> getProjects(){
+    return projects;
+  }
+
 
   public Admin id(Integer id) {
     this.id = id;
