@@ -104,7 +104,7 @@ public class Admin   {
   )
   private Set<Project> projects = new HashSet<>();
   
-  @JsonCreator
+
   public Set<Project> getProjects(){
     return projects;
   }
@@ -352,6 +352,7 @@ public class Admin   {
     sb.append("    role: ").append(toIndentedString(role)).append("\n");
     sb.append("    isAdmin: ").append(toIndentedString(isAdmin)).append("\n");
     sb.append("    isEmailConfirmed: ").append(toIndentedString(isEmailConfirmed)).append("\n");
+    sb.append("    projects: ").append(toIndentedString(projects)).append("\n");
     sb.append("}");
     return sb.toString();
   }

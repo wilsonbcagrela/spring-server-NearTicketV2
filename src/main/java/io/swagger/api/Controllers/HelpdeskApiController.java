@@ -65,9 +65,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public @ResponseBody Iterable<Admin> getAdmins() {
+    public @ResponseBody String getAdmins() {
 
-        return adminRepository.findAll();
+        return adminRepository.findAll().toString();
     }
 
     public @ResponseBody Iterable<Client> getClients() {
@@ -76,9 +76,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return clientRepository.findAll();
     }
 
-    public @ResponseBody Iterable<Project> getProjectsHelpdesk(@RequestParam Integer id) {
+    public @ResponseBody String getProjectsHelpdesk(@RequestParam Integer id) {
         
-        return adminRepository.findAdminById(id).getProjects();
+        return adminRepository.findAdminById(id).getProjects().toString();
     }
 
     public ResponseEntity<Void> getTicketByIdHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body) {
@@ -121,17 +121,17 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
 
-    public void manytomanytest(@RequestParam Integer id){
+    // public void manytomanytest(@RequestParam Integer id){
         
-        Project project = new Project();
-        project.setName("name");
-        project.setDescription("description");
+    //     Project project = new Project();
+    //     project.setName("name");
+    //     project.setDescription("description");
         
 
-        project.getAdmin().add(adminRepository.findAdminById(id));
-        adminRepository.findAdminById(id).getProjects().add(project);
+    //     project.getAdmin().add(adminRepository.findAdminById(id));
+    //     adminRepository.findAdminById(id).getProjects().add(project);
 
-        // adminRepository.save(admin);
-        projectRepository.save(project);
-    }
+    //     // adminRepository.save(admin);
+    //     projectRepository.save(project);
+    // }
 }

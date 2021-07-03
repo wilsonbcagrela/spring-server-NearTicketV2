@@ -1,5 +1,6 @@
 package io.swagger.api.Controllers;
 
+import io.swagger.model.Admin;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.Ticket.GravityEnum;
@@ -8,6 +9,7 @@ import io.swagger.model.Ticket.StatusEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.UserApi;
+import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
 
@@ -41,6 +43,8 @@ public class UserApiController implements UserApi {
     private ProjectRepository projectRepository;
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private AdminRepository adminRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -52,6 +56,10 @@ public class UserApiController implements UserApi {
         Project project = new Project();
         project.setName(name);
         project.setDescription(description);
+        for (Admin admin : adminRepository.findAll()) {
+            admin.getProjects().add(project);
+        }
+
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }

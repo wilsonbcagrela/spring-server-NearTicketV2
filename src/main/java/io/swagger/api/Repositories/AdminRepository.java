@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.model.Admin;
+import io.swagger.model.Project;
 
 
 
@@ -22,5 +23,5 @@ public interface AdminRepository extends CrudRepository<Admin, Integer> {
     
     @Query(value ="SELECT a FROM Admin a WHERE a.id =?1")
     @ResponseBody Admin findAdminById(@RequestParam Integer id);
-
+    
 }
