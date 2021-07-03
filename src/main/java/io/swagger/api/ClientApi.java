@@ -76,7 +76,8 @@ public interface ClientApi {
     @RequestMapping(value = "/client/projects",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Void> getProjectsClient();
+    String getProjectsClient(@RequestParam Integer Client_id);
+    //falta implementar
 
 
     @ApiOperation(value = "Returns all tickets associated with the client", nickname = "getTicketsClient", notes = "Returns projects", tags={ "client", })

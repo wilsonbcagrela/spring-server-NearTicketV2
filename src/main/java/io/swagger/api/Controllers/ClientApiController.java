@@ -72,9 +72,9 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> getProjectsClient() {
-        // String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public @ResponseBody String getProjectsClient(@RequestParam Integer Client_id) {
+       
+        return "userRepository.findAllUserOfClient(Client_id).getProject().toString()";
     }
 
     public ResponseEntity<Void> getTicketsClient() {
