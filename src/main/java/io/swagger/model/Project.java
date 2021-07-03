@@ -41,8 +41,10 @@ public class Project   {
     return this;
   }
   //-----------------------many to many -----------------------------------
-  // @ManyToMany(mappedBy = "project", fetch = FetchType.LAZY)
-  // private Set<User> user = new HashSet<>();
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "project")
+  private Set<User> user = new HashSet<>();
+
+
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects" )
   private Set<Admin> admin = new HashSet<>();
 

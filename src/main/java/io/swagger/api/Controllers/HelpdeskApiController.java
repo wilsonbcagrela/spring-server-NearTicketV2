@@ -52,8 +52,8 @@ public class HelpdeskApiController implements HelpdeskApi {
     private UserRepository userRepository;
     @Autowired
     private TicketRepository ticketRepository;
-    @Autowired
-    private ProjectRepository projectRepository;
+    // @Autowired
+    // private ProjectRepository projectRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public HelpdeskApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;

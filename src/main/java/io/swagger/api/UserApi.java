@@ -78,7 +78,7 @@ public interface UserApi {
     //     produces = { "application/json" }, 
     //     method = RequestMethod.GET)
     @GetMapping(path="/user/projects")
-    @ResponseBody Iterable<Project> getProjects();
+    @ResponseBody String getProjects(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Find ticket by ID", nickname = "getTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "user", })

@@ -3,6 +3,7 @@ package io.swagger.api.Controllers;
 import io.swagger.model.Admin;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.User;
 import io.swagger.model.Ticket.GravityEnum;
 import io.swagger.model.Ticket.StatusEnum;
 
@@ -12,6 +13,7 @@ import io.swagger.api.UserApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
+import io.swagger.api.Repositories.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +47,8 @@ public class UserApiController implements UserApi {
     private TicketRepository ticketRepository;
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private UserRepository userRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -59,7 +63,9 @@ public class UserApiController implements UserApi {
         for (Admin admin : adminRepository.findAll()) {
             admin.getProjects().add(project);
         }
-
+        for (User user : userRepository.findAll()) {
+            user.getProject().add(project);
+        }
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
@@ -87,10 +93,10 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
-    public @ResponseBody Iterable<Project> getProjects() {
+    public @ResponseBody String getProjects(@RequestParam Integer id, @RequestParam Integer Client_id) {
         
         
-        return projectRepository.findAll();
+        return userRepository.findUserById(id, Client_id).getProject().toString();
     }
 
     public @ResponseBody Iterable<Ticket> getTicketById(@RequestParam Integer Project_id, @RequestParam Integer id) {

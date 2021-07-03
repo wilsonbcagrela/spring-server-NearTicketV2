@@ -2,6 +2,8 @@ package io.swagger.api.Controllers;
 
 import java.util.List;
 import io.swagger.model.User;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.ClientApi;
@@ -80,14 +82,14 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public  @ResponseBody Iterable<User> getUserByName(@RequestParam String username, @RequestParam Integer Client_id) {
+    public @ResponseBody String getUserById(@RequestParam Integer id, @RequestParam Integer Client_id) {
         
-        return userRepository.findUserByUserName(username, Client_id);
+        return userRepository.findUserById(id, Client_id).toString();
 
     }
-    public @ResponseBody Iterable<User> getUsersClient(@RequestParam Integer Client_id) {
-        // This returns a JSON or XML with the users
-        return userRepository.findAllUserOfClient(Client_id);
+    public @ResponseBody String getUsersClient(@RequestParam Integer Client_id) {
+
+        return userRepository.findAllUserOfClient(Client_id).toString();
     }
 
     public ResponseEntity<Void> logoutClient() {

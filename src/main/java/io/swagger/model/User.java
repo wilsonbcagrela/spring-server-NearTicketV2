@@ -50,16 +50,17 @@ public class User   {
 
   private Integer Client_id;
   
+  //  @JoinColumn(name = "User_Client_id")
   //-------------------------------------manytomany--------------------------------------
-  // @ManyToMany
-  // @JoinTable(
-  //   name = "user_has_project",
-  //   joinColumns = {
-  //     @JoinColumn(name = "User_id")},
-  //   inverseJoinColumns = {
-  //     @JoinColumn(name = "Project_id")}
-  // )
-  // private Set<Project> project = new HashSet<>(); 
+  @ManyToMany
+  @JoinTable(
+    name = "user_has_project",
+    joinColumns = {
+      @JoinColumn(name = "User_id")},
+    inverseJoinColumns = {
+      @JoinColumn(name = "Project_id")}
+  )
+  private Set<Project> project = new HashSet<>(); 
   
   public Integer getId() {
     return id;
@@ -68,9 +69,9 @@ public class User   {
   public void setId(Integer id) {
     this.id = id;
   }
-  // public Set<Project> getProject(){
-  //   return project;
-  // }
+  public Set<Project> getProject(){
+    return project;
+  }
   // public void setProject(Set<Project> project ){
   //   this.project = project;
   // }
@@ -176,6 +177,7 @@ public class User   {
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("    isEmailConfirmed: ").append(toIndentedString(isEmailConfirmed)).append("\n");
+    sb.append("    Projects: ").append(toIndentedString(project)).append("\n");
     sb.append("}");
     return sb.toString();
   }

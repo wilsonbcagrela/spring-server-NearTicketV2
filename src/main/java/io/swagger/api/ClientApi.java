@@ -89,7 +89,7 @@ public interface ClientApi {
     ResponseEntity<Void> getTicketsClient();
 
 
-    @ApiOperation(value = "Get user by user name", nickname = "getUserByName", notes = "", response = User.class, tags={ "client", })
+    @ApiOperation(value = "Get user by id", nickname = "getUserByid", notes = "", response = User.class, tags={ "client", })
     // @ApiResponses(value = { 
     //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
     //     @ApiResponse(code = 400, message = "Invalid username supplied"),
@@ -97,8 +97,8 @@ public interface ClientApi {
     // @RequestMapping(value = "/client/user/{username}",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
-    @GetMapping(path="/client/user/{username}")
-    Iterable<User> getUserByName(@RequestParam String username, @RequestParam Integer Client_id);
+    @GetMapping(path="/client/user/{id}")
+    String getUserById(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsersClient", notes = "Gets a list of all users", response = User.class, tags={ "client", })
@@ -111,7 +111,7 @@ public interface ClientApi {
     //     method = RequestMethod.GET)
     //gets all users of a specific client
     @GetMapping(path="/client/users")
-    public Iterable<User> getUsersClient(@RequestParam Integer Client_id);
+    public String getUsersClient(@RequestParam Integer Client_id);
 
     @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
     @ApiResponses(value = { 
