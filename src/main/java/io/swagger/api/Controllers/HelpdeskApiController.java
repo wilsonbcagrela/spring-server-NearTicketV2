@@ -60,9 +60,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> deleteTicketHelpdesk(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteTicketHelpdesk(@RequestParam Integer id) {
+        ticketRepository.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
     public @ResponseBody String getAdmins() {
@@ -81,9 +81,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return adminRepository.findAdminById(id).getProjects().toString();
     }
 
-    public ResponseEntity<Void> getTicketByIdHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public @ResponseBody Iterable<Ticket> getTicketByIdHelpdesk(@RequestParam Integer id,@RequestParam Integer Project_id) {
+        
+        return ticketRepository.findTicketsById(Project_id, id);
     }
 
     public @ResponseBody Iterable<Ticket> getTicketsHelpdesk(@RequestParam Integer Project_id) {

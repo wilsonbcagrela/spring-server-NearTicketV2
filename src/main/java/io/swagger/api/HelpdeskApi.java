@@ -14,6 +14,7 @@ import io.swagger.model.Admin.RoleEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,14 +36,15 @@ import javax.validation.constraints.*;
 public interface HelpdeskApi {
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicketHelpdesk", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteTicketHelpdesk(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.DELETE)
+    @DeleteMapping("/helpdesk/project/ticket/{ticketId}")
+    ResponseEntity<Void> deleteTicketHelpdesk(@RequestParam Integer id);
 
 
     @ApiOperation(value = "Get all users that are admins", nickname = "getAdmins", notes = "Gets a list of all admins users", response = Admin.class, tags={ "helpdesk", })
@@ -83,12 +85,13 @@ public interface HelpdeskApi {
     @ApiOperation(value = "Update ticket to be an issue or a request", nickname = "getTicketByIdHelpdesk", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 202, message = "Accepted operation"),
         @ApiResponse(code = 400, message = "Invalid ticket supplied"),
         @ApiResponse(code = 404, message = "Ticket not found") })
     @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.PUT)
-    ResponseEntity<Void> getTicketByIdHelpdesk(@ApiParam(value = "ticket that need to be updated to be an issue or a request",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
+        ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get tickets", nickname = "getTicketsHelpdesk", notes = "Gets a list of all the ticket", response = Ticket.class, tags={ "helpdesk", })
@@ -132,8 +135,8 @@ public interface HelpdeskApi {
     // @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
-    @PutMapping(path="/helpdesk/project/ticket/{ticketId}")
-    ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id);
+    @GetMapping(path="/helpdesk/project/ticket/{ticketId}")
+    @ResponseBody Iterable<Ticket> getTicketByIdHelpdesk(@RequestParam Integer id,@RequestParam Integer Project_id);
     
     @PostMapping(path="/helpdesk/createAdmin")
     public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
