@@ -41,9 +41,9 @@ public class TechnicianApiController implements TechnicianApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> deleteTicketTechnician(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> deleteTicketTechnician(@RequestParam Integer id) {
+        ticketRepository.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
     public @ResponseBody Iterable<Ticket> getIssueTicketById(@RequestParam Integer id, @RequestParam Integer Project_id) {

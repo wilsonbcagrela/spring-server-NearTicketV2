@@ -10,6 +10,7 @@ import io.swagger.model.Ticket;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,14 +32,15 @@ import javax.validation.constraints.*;
 public interface TechnicianApi {
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicketTechnician", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.DELETE)
-    ResponseEntity<Void> deleteTicketTechnician(@Min(1L)@ApiParam(value = "ID of the ticket that needs to be deleted",required=true) @PathVariable("ticketId") Long ticketId);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.DELETE)
+    @DeleteMapping("/helpdesk/project/ticket/{ticketId}")
+    ResponseEntity<Void> deleteTicketTechnician(@RequestParam Integer id);
 
 
     @ApiOperation(value = "Find issue tickets by ID", nickname = "getIssueTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "technician", })
