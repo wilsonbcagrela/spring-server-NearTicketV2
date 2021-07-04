@@ -2,6 +2,8 @@ package io.swagger.api.Controllers;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.StatusEnum;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.ConsultantApi;
@@ -72,9 +74,10 @@ public class ConsultantApiController implements ConsultantApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateConsultant(@ApiParam(value = "request that need to be updated",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> updateConsultant(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id) {
+        
+        ticketRepository.UpdateTicketsConsultant(status, supervisor, id, Project_id);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
 }

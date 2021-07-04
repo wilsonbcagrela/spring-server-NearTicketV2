@@ -7,12 +7,14 @@ package io.swagger.api;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,13 +88,14 @@ public interface ConsultantApi {
 
 
     @ApiOperation(value = "Update a request", nickname = "updateConsultant", notes = "This can only be done by the logged in admin with the role of consultant.", tags={ "consultant", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 400, message = "Invalid ticket supplied"),
-        @ApiResponse(code = 404, message = "Ticket not found") })
-    @RequestMapping(value = "/consultant/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> updateConsultant(@ApiParam(value = "request that need to be updated",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 400, message = "Invalid ticket supplied"),
+    //     @ApiResponse(code = 404, message = "Ticket not found") })
+    // @RequestMapping(value = "/consultant/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.PUT)
+    @PutMapping(path="/consultant/project/ticket/{ticketId}")
+    ResponseEntity<Void> updateConsultant(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 }
