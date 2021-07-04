@@ -53,25 +53,27 @@ public interface ConsultantApi {
 
 
     @ApiOperation(value = "Get tickets that are requests", nickname = "getRequest", notes = "Gets a list of all the tickets that are requests", response = Ticket.class, tags={ "consultant", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/consultant/project/tickets",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Ticket> getRequest();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/consultant/project/tickets",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/consultant/project/tickets")
+    Iterable<Ticket> getRequest(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Find request tickets by ID", nickname = "getRequestTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "consultant", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/consultant/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Ticket> getRequestTicketById(@Min(1L) @Max(10L) @ApiParam(value = "ID of ticket that needs to be fetched",required=true) @PathVariable("ticketId") Long ticketId);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/consultant/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/consultant/project/ticket/{ticketId}")
+    Iterable<Ticket> getRequestTicketById(@RequestParam Integer id, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Logs out current logged in consultant session", nickname = "logoutConsultant", notes = "", tags={ "consultant", })

@@ -29,12 +29,20 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1 AND a.id = ?2")
     @ResponseBody Iterable<Ticket> findTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
 
+    //Issue queries --------------------------------------------------------------------------------------
     @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1")
     @ResponseBody Iterable<Ticket> findIssueTickets(@RequestParam Integer Project_id);
     
     @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1 AND a.id = ?2")
     @ResponseBody Iterable<Ticket> findIssueTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
     
+    //Request queries-------------------------------------------------------------------------------------
+    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.Project_id =?1")
+    @ResponseBody Iterable<Ticket> findRequestTickets(@RequestParam Integer Project_id);
+    
+    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.Project_id =?1 AND a.id = ?2")
+    @ResponseBody Iterable<Ticket> findRequestTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value ="UPDATE Ticket a SET a.name =?1, a.description = ?2, a.urgency=?3, a.supervisor =?4, a.deadLine =?5, a.gravity =?6, a.status =?7  WHERE a.id = ?8 AND a.Project_id = ?9")
