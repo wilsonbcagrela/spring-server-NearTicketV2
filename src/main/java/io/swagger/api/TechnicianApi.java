@@ -10,6 +10,7 @@ import io.swagger.model.Ticket;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -52,14 +53,15 @@ public interface TechnicianApi {
 
 
     @ApiOperation(value = "Get tickets that are issues", nickname = "getIssues", notes = "Gets a list of all the tickets that are issues", response = Ticket.class, tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/technician/project/tickets",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Ticket> getIssues();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/technician/project/tickets",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/technician/project/tickets")
+    Iterable<Ticket> getIssues(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get all projects", nickname = "getProjectsTechnician", notes = "Gets a list of all the projects", response = Project.class, tags={ "technician", })

@@ -28,6 +28,9 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
     @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1 AND a.id = ?2")
     @ResponseBody Iterable<Ticket> findTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
+
+    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1")
+    @ResponseBody Iterable<Ticket> findIssueTickets(@RequestParam Integer Project_id);
     
     @Transactional
     @Modifying(clearAutomatically = true)
