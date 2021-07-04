@@ -65,9 +65,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
-    public @ResponseBody String getAdmins() {
+    public @ResponseBody Iterable<Admin> getAdmins() {
 
-        return adminRepository.findAll().toString();
+        return adminRepository.findAll();
     }
 
     public @ResponseBody Iterable<Client> getClients() {
@@ -76,9 +76,9 @@ public class HelpdeskApiController implements HelpdeskApi {
         return clientRepository.findAll();
     }
 
-    public @ResponseBody String getProjectsHelpdesk(@RequestParam Integer id) {
+    public @ResponseBody Iterable<Project> getProjectsHelpdesk(@RequestParam Integer id) {
         
-        return adminRepository.findAdminById(id).getProjects().toString();
+        return adminRepository.findAdminById(id).getProjects();
     }
 
     public @ResponseBody Iterable<Ticket> getTicketByIdHelpdesk(@RequestParam Integer id,@RequestParam Integer Project_id) {

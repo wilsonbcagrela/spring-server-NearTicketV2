@@ -7,7 +7,10 @@ package io.swagger.api;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
 import io.swagger.model.User;
+import io.swagger.model.Project;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -76,7 +79,7 @@ public interface ClientApi {
     @RequestMapping(value = "/client/projects",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    List<String> getProjectsClient(@RequestParam Integer Client_id);
+    List<Set<Project>> getProjectsClient(@RequestParam Integer Client_id);
     
 
 
@@ -99,7 +102,7 @@ public interface ClientApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
     @GetMapping(path="/client/user/{id}")
-    String getUserById(@RequestParam Integer id, @RequestParam Integer Client_id);
+    User getUserById(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsersClient", notes = "Gets a list of all users", response = User.class, tags={ "client", })
@@ -112,7 +115,7 @@ public interface ClientApi {
     //     method = RequestMethod.GET)
     //gets all users of a specific client
     @GetMapping(path="/client/users")
-    public String getUsersClient(@RequestParam Integer Client_id);
+    public Iterable<User> getUsersClient(@RequestParam Integer Client_id);
 
     @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
     @ApiResponses(value = { 

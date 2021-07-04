@@ -6,6 +6,8 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 
 import org.hibernate.annotations.ManyToAny;
@@ -93,7 +95,8 @@ public class Admin   {
 
   @JsonProperty("isEmailConfirmed")
   private Boolean isEmailConfirmed = false;
-
+  
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(name = "admin_has_project", 
     joinColumns = {

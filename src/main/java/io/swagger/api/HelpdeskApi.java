@@ -56,7 +56,7 @@ public interface HelpdeskApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
     @GetMapping(path="/helpdesk/admins")
-    public @ResponseBody String getAdmins();
+    public @ResponseBody Iterable<Admin> getAdmins();
 
 
     @ApiOperation(value = "Get all clients", nickname = "getClients", notes = "Gets a list of all clients", response = Client.class, tags={ "helpdesk", })
@@ -80,7 +80,7 @@ public interface HelpdeskApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.GET)
     @GetMapping(path="/helpdesk/projects")
-    @ResponseBody String getProjectsHelpdesk(@RequestParam Integer id);
+    @ResponseBody Iterable<Project> getProjectsHelpdesk(@RequestParam Integer id);
 
     @ApiOperation(value = "Update ticket to be an issue or a request", nickname = "getTicketByIdHelpdesk", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
     @ApiResponses(value = { 

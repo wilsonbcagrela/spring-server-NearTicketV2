@@ -30,6 +30,7 @@ import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Set;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
 
@@ -93,10 +94,10 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
-    public @ResponseBody String getProjects(@RequestParam Integer id, @RequestParam Integer Client_id) {
+    public @ResponseBody Iterable<Project> getProjects(@RequestParam Integer id, @RequestParam Integer Client_id) {
         
         
-        return userRepository.findUserById(id, Client_id).getProject().toString();
+        return userRepository.findUserById(id, Client_id).getProject();
     }
 
     public @ResponseBody Iterable<Ticket> getTicketById(@RequestParam Integer Project_id, @RequestParam Integer id) {

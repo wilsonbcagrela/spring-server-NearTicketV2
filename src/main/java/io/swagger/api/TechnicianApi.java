@@ -39,7 +39,7 @@ public interface TechnicianApi {
     // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.DELETE)
-    @DeleteMapping("/helpdesk/project/ticket/{ticketId}")
+    @DeleteMapping("/technician/project/ticket/{ticketId}")
     ResponseEntity<Void> deleteTicketTechnician(@RequestParam Integer id);
 
 

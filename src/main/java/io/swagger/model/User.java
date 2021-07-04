@@ -6,6 +6,9 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -52,6 +55,7 @@ public class User   {
   
   //  @JoinColumn(name = "User_Client_id")
   //-------------------------------------manytomany--------------------------------------
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
     name = "user_has_project",
@@ -69,6 +73,8 @@ public class User   {
   public void setId(Integer id) {
     this.id = id;
   }
+  // @JsonManagedReference
+  @JsonIgnore
   public Set<Project> getProject(){
     return project;
   }
@@ -156,12 +162,13 @@ public class User   {
         Objects.equals(this.email, user.email) &&
         Objects.equals(this.password, user.password) &&
         Objects.equals(this.phone, user.phone) &&
-        Objects.equals(this.isEmailConfirmed, user.isEmailConfirmed);
+        Objects.equals(this.isEmailConfirmed, user.isEmailConfirmed) &&
+        Objects.equals(this.project, user.project);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, userName, firstName, lastName, email, password, phone, isEmailConfirmed);
+    return Objects.hash(id, userName, firstName, lastName, email, password, phone, isEmailConfirmed, project);
   }
 
   @Override

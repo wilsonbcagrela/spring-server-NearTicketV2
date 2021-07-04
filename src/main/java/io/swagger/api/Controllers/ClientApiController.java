@@ -2,6 +2,7 @@ package io.swagger.api.Controllers;
 
 import java.util.*;
 
+import io.swagger.model.Project;
 import io.swagger.model.User;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
@@ -73,11 +74,11 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public @ResponseBody List<String> getProjectsClient(@RequestParam Integer Client_id) {
+    public @ResponseBody List<Set<Project>> getProjectsClient(@RequestParam Integer Client_id) {
         
-        List<String> projectsClient = new Stack<String>();
+        List<Set<Project>> projectsClient = new Stack<Set<Project>>();
         for (User user : userRepository.findAllUserOfClient(Client_id)) {
-            projectsClient.add(user.getProject().toString());
+            projectsClient.add(user.getProject());
             
         }
         
@@ -89,14 +90,14 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public @ResponseBody String getUserById(@RequestParam Integer id, @RequestParam Integer Client_id) {
+    public @ResponseBody User getUserById(@RequestParam Integer id, @RequestParam Integer Client_id) {
         
-        return userRepository.findUserById(id, Client_id).toString();
+        return userRepository.findUserById(id, Client_id);
 
     }
-    public @ResponseBody String getUsersClient(@RequestParam Integer Client_id) {
+    public @ResponseBody Iterable<User> getUsersClient(@RequestParam Integer Client_id) {
 
-        return userRepository.findAllUserOfClient(Client_id).toString();
+        return userRepository.findAllUserOfClient(Client_id);
     }
 
     public ResponseEntity<Void> logoutClient() {

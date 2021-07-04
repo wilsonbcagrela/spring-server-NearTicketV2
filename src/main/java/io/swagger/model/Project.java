@@ -6,6 +6,8 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -41,10 +43,11 @@ public class Project   {
     return this;
   }
   //-----------------------many to many -----------------------------------
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "project")
   private Set<User> user = new HashSet<>();
 
-
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projects" )
   private Set<Admin> admin = new HashSet<>();
 
