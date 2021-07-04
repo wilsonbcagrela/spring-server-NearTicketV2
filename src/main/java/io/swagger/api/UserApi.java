@@ -71,25 +71,25 @@ public interface UserApi {
 
 
     @ApiOperation(value = "Returns all projects associated with the user", nickname = "getProjects", notes = "Returns projects", tags={ "user", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation"),
-    //     @ApiResponse(code = 404, message = "Projects not found") })
-    // @RequestMapping(value = "/user/projects",
-    //     produces = { "application/json" }, 
-    //     method = RequestMethod.GET)
-    @GetMapping(path="/user/projects")
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 404, message = "Projects not found") })
+    @RequestMapping(value = "/user/projects",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    // @GetMapping(path="/user/projects")
     @ResponseBody String getProjects(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Find ticket by ID", nickname = "getTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "user", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/user/project/ticket/{ticketId}",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
-        @GetMapping(path="/user/project/ticket/{ticketId}")
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") })
+    @RequestMapping(value = "/user/project/ticket/{ticketId}",
+        produces = { "application/xml", "application/json" }, 
+        method = RequestMethod.GET)
+        // @GetMapping(path="/user/project/ticket/{ticketId}")
         @ResponseBody Iterable<Ticket> getTicketById(@RequestParam Integer Project_id, @RequestParam Integer id);
 
 

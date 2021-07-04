@@ -77,7 +77,7 @@ public interface ClientApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     List<String> getProjectsClient(@RequestParam Integer Client_id);
-    //falta implementar
+    
 
 
     @ApiOperation(value = "Returns all tickets associated with the client", nickname = "getTicketsClient", notes = "Returns projects", tags={ "client", })
