@@ -1,6 +1,7 @@
 package io.swagger.api.Controllers;
 
-import java.util.List;
+import java.util.*;
+
 import io.swagger.model.User;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
@@ -72,9 +73,15 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public @ResponseBody String getProjectsClient(@RequestParam Integer Client_id) {
-       
-        return "userRepository.findAllUserOfClient(Client_id).getProject().toString()";
+    public @ResponseBody List<String> getProjectsClient(@RequestParam Integer Client_id) {
+        
+        List<String> projectsClient = new Stack<String>();
+        for (User user : userRepository.findAllUserOfClient(Client_id)) {
+            projectsClient.add(user.getProject().toString());
+            
+        }
+        
+        return projectsClient;
     }
 
     public ResponseEntity<Void> getTicketsClient() {

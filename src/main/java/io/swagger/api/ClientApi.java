@@ -76,7 +76,7 @@ public interface ClientApi {
     @RequestMapping(value = "/client/projects",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    String getProjectsClient(@RequestParam Integer Client_id);
+    List<String> getProjectsClient(@RequestParam Integer Client_id);
     //falta implementar
 
 
