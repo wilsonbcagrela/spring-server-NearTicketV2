@@ -42,14 +42,15 @@ public interface TechnicianApi {
 
 
     @ApiOperation(value = "Find issue tickets by ID", nickname = "getIssueTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Ticket> getIssueTicketById(@Min(1L) @Max(10L) @ApiParam(value = "ID of ticket that needs to be fetched",required=true) @PathVariable("ticketId") Long ticketId);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/technician/project/ticket/{ticketId}")
+    Iterable<Ticket> getIssueTicketById(@RequestParam Integer id, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get tickets that are issues", nickname = "getIssues", notes = "Gets a list of all the tickets that are issues", response = Ticket.class, tags={ "technician", })
