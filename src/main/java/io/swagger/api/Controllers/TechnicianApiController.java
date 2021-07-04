@@ -2,9 +2,12 @@ package io.swagger.api.Controllers;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.StatusEnum;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.TechnicianApi;
+import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.TicketRepository;
 
 import org.slf4j.Logger;
@@ -35,6 +38,8 @@ public class TechnicianApiController implements TechnicianApi {
     private final HttpServletRequest request;
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private AdminRepository adminRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public TechnicianApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -55,27 +60,9 @@ public class TechnicianApiController implements TechnicianApi {
         return ticketRepository.findIssueTickets(Project_id);
     }
 
-    public ResponseEntity<Project> getProjectsTechnician() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xml")) {
-            try {
-                return new ResponseEntity<Project>(objectMapper.readValue("<project>  <id>123456789</id>  <name>my project</name>  <description>This projects is about collecting tickets</description></project>", Project.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/xml", e);
-                return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+    public @ResponseBody Iterable<Project> getProjectsTechnician(@RequestParam Integer id) {
 
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Project>(objectMapper.readValue("{  \"name\" : \"my project\",  \"description\" : \"This projects is about collecting tickets\",  \"id\" : 0}", Project.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Project>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<Project>(HttpStatus.NOT_IMPLEMENTED);
+        return adminRepository.findAdminById(id).getProjects();
     }
 
     public ResponseEntity<Void> logoutTechnician() {
@@ -83,9 +70,10 @@ public class TechnicianApiController implements TechnicianApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> updateTechnician(@ApiParam(value = "issue that need to be updated",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> updateTechnician(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id) {
+        
+        ticketRepository.UpdateTicketsTechnician(status, supervisor, id, Project_id);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
 
 }

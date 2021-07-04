@@ -7,12 +7,14 @@ package io.swagger.api;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,14 +70,15 @@ public interface TechnicianApi {
 
 
     @ApiOperation(value = "Get all projects", nickname = "getProjectsTechnician", notes = "Gets a list of all the projects", response = Project.class, tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Project.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/technician/projects",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Project> getProjectsTechnician();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Project.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/technician/projects",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/technician/projects")
+    Iterable<Project> getProjectsTechnician(@RequestParam Integer id);
 
 
     @ApiOperation(value = "Logs out current logged in technician session", nickname = "logoutTechnician", notes = "", tags={ "technician", })
@@ -88,13 +91,14 @@ public interface TechnicianApi {
 
 
     @ApiOperation(value = "Update a issue", nickname = "updateTechnician", notes = "This can only be done by the logged in admin with the role of technician.", tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 400, message = "Invalid ticket supplied"),
-        @ApiResponse(code = 404, message = "Ticket not found") })
-    @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<Void> updateTechnician(@ApiParam(value = "issue that need to be updated",required=true) @PathVariable("ticketId") String ticketId,@ApiParam(value = "Updated ticket object" ,required=true )  @Valid @RequestBody Ticket body);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 400, message = "Invalid ticket supplied"),
+    //     @ApiResponse(code = 404, message = "Ticket not found") })
+    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.PUT)
+    @PutMapping(path="/technician/project/ticket/{ticketId}")
+    ResponseEntity<Void> updateTechnician(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 }
