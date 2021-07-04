@@ -3,12 +3,14 @@ package io.swagger.api.Controllers;
 import java.util.*;
 
 import io.swagger.model.Project;
+import io.swagger.model.Ticket;
 import io.swagger.model.User;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import io.swagger.api.ClientApi;
+import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
 
 import org.slf4j.Logger;
@@ -38,6 +40,8 @@ public class ClientApiController implements ClientApi {
     private final HttpServletRequest request;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public ClientApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -85,9 +89,9 @@ public class ClientApiController implements ClientApi {
         return projectsClient;
     }
 
-    public ResponseEntity<Void> getTicketsClient() {
+    public @ResponseBody Iterable<Ticket> getTicketsClient(@RequestParam Integer Project_id) {
         // String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        return ticketRepository.findTicketsOfAProject(Project_id);
     }
 
     public @ResponseBody User getUserById(@RequestParam Integer id, @RequestParam Integer Client_id) {

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import io.swagger.model.User;
 import io.swagger.model.Project;
+import io.swagger.model.Ticket;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -84,13 +85,14 @@ public interface ClientApi {
 
 
     @ApiOperation(value = "Returns all tickets associated with the client", nickname = "getTicketsClient", notes = "Returns projects", tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 404, message = "Projects not found") })
-    @RequestMapping(value = "/client/project/tickets",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> getTicketsClient();
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 404, message = "Projects not found") })
+    // @RequestMapping(value = "/client/project/tickets",
+    //     produces = { "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/client/project/tickets")
+    Iterable<Ticket> getTicketsClient(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get user by id", nickname = "getUserByid", notes = "", response = User.class, tags={ "client", })
