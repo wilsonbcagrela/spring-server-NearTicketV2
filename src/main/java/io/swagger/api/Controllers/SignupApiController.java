@@ -32,14 +32,14 @@ public class SignupApiController implements SignupApi {
         this.request = request;
     }
 
-    public @ResponseBody String registerClient(@RequestParam String name,@RequestParam String password, @RequestParam String email, @RequestParam Integer phone, @RequestParam Boolean isEmailConfirmed) {
+    public @ResponseBody String registerClient(@RequestParam String name,@RequestParam String password, @RequestParam String email, @RequestParam Integer phone) {
         // String accept = request.getHeader("Accept");
         Client n = new Client();
         n.setName(name);
         n.setEmail(email);
         n.setPassword(password);
         n.setPhone(phone);
-        n.setIsEmailConfirmed(isEmailConfirmed);
+        n.setIsEmailConfirmed(false);
         
         clientRepository.save(n);
         return "saved";

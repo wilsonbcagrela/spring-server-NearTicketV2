@@ -51,6 +51,10 @@ public class Project   {
   public Set<Admin> getAdmin(){
     return admin;
   }
+  public Set<User> getUser(){
+    return user;
+  }
+  
   public Integer getId() {
     return id;
   }

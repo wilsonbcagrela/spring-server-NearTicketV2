@@ -50,7 +50,7 @@ public class UserApiController implements UserApi {
         this.request = request;
     }
 
-    public ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description) {
+    public ResponseEntity<Project> addProject(@RequestParam Integer id, @RequestParam Integer Client_id, @RequestParam String name, @RequestParam String description) {
 
         Project project = new Project();
         project.setName(name);
@@ -58,9 +58,11 @@ public class UserApiController implements UserApi {
         for (Admin admin : adminRepository.findAll()) {
             admin.getProjects().add(project);
         }
-        for (User user : userRepository.findAll()) {
-            user.getProject().add(project);
-        }
+        
+        // for (User user : userRepository.findAllUserOfClient(Client_id)) {
+        //     user.getProject().add(project);
+        // }
+        userRepository.findUserById(id, Client_id).getProject().add(project);
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
@@ -114,5 +116,15 @@ public class UserApiController implements UserApi {
         
         ticketRepository.UpdateTicketsById(name,description, urgency, supervisor, deadLine, gravity,status, id, Project_id);
         return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id,@RequestParam Integer Project_id){
+        //cuidado se o criador do projeto adcionar-se a si proprio pode dar problemas
+     
+        Project project = projectRepository.findOne(Project_id);
+        userRepository.findUserById(id, Client_id).getProject().add(project);
+
+        projectRepository.save(project);
+        return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
     }
 }

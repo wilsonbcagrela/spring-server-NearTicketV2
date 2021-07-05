@@ -37,7 +37,7 @@ public interface UserApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.POST)
     @PostMapping(path="/user/project")
-    ResponseEntity<Project> addProject(@RequestParam String name, @RequestParam String description);
+    ResponseEntity<Project> addProject(@RequestParam Integer id,@RequestParam Integer Client_id, @RequestParam String name, @RequestParam String description);
 
 
     @ApiOperation(value = "Add a ticket to a project", nickname = "addTicket", notes = "Here you can add a ticket to an a existing project", response = Ticket.class, tags={ "user", })
@@ -119,4 +119,8 @@ public interface UserApi {
     @PutMapping(path="/user/project/ticket/{ticketId}")
     ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) String deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity, @RequestParam(required = false) String supervisor,@RequestParam(required = false) StatusEnum status);
         //, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status
+
+    @ApiOperation(value = "Add a user to a project", nickname = "AddUserProject", notes = "", response = Project.class, tags={ "user", })
+    @PostMapping(path="/user/project/addUser")
+    ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id,@RequestParam Integer Project_id);
 }

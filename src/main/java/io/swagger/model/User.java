@@ -52,7 +52,7 @@ public class User   {
   //  @JoinColumn(name = "User_Client_id")
   //-------------------------------------manytomany--------------------------------------
   @JsonIgnore
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(
     name = "user_has_project",
     joinColumns = {
@@ -74,6 +74,10 @@ public class User   {
   public Set<Project> getProject(){
     return project;
   }
+  // public void addProject(Project project) {
+  //   this.getProject().add(project);
+  //   project.getUser().add(this);
+  // }
   // public void setProject(Set<Project> project ){
   //   this.project = project;
   // }
