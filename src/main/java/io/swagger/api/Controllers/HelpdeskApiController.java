@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.api.HelpdeskApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
+import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
 
@@ -36,7 +37,8 @@ public class HelpdeskApiController implements HelpdeskApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
-
+    @Autowired
+    private ProjectRepository projectRepository;
     @Autowired
     private AdminRepository adminRepository;
     @Autowired
@@ -113,7 +115,15 @@ public class HelpdeskApiController implements HelpdeskApi {
         adminRepository.save(admin);
         return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
+    public ResponseEntity<Project> addProjectToAdmin(@RequestParam Integer id,@RequestParam Integer Project_id){
+        //cuidado se o criador do projeto adcionar-se a si proprio pode dar problemas
+     
+        Project project = projectRepository.findOne(Project_id);
+        adminRepository.findOne(id).getProjects().add(project);
 
+        projectRepository.save(project);
+        return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
+    }
     // public void manytomanytest(@RequestParam Integer id){
         
     //     Project project = new Project();

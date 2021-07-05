@@ -136,6 +136,9 @@ public interface HelpdeskApi {
     @PostMapping(path="/helpdesk/createAdmin")
     public ResponseEntity<Admin> addAdmin(@RequestParam String userName, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password, @RequestParam Integer phone,@RequestParam RoleEnum role);
     
+    @ApiOperation(value = "Add a admin to a project", nickname = "addAdmin", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
+    @PostMapping(path="/helpdesk/project/addAdmin")
+    ResponseEntity<Project> addProjectToAdmin(@RequestParam Integer id,@RequestParam Integer Project_id);
     // @PostMapping(path="/helpdesk/teste")
     // void manytomanytest(@RequestParam Integer id);
 }
