@@ -5,7 +5,6 @@
  */
 package io.swagger.api;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,8 +33,8 @@ import javax.validation.Valid;
 public interface ClientApi {
 
     @ApiOperation(value = "Create user", nickname = "createUser", notes = "This can only be done by the logged in user.", tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation") })
     // @RequestMapping(value = "/client/user",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.POST)

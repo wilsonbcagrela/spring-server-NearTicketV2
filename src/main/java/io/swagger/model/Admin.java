@@ -5,12 +5,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import org.hibernate.annotations.ManyToAny;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.CascadeType;
