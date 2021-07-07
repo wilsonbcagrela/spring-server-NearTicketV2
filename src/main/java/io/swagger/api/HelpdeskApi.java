@@ -113,13 +113,13 @@ public interface HelpdeskApi {
     @ResponseBody Iterable<User> getUsers(@RequestParam Integer Client_id);
 
 
-    @ApiOperation(value = "Logs out current logged in helpdesk session", nickname = "logoutHelpdesk", notes = "", tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/helpdesk/logout",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> logoutHelpdesk();
+    // @ApiOperation(value = "Logs out current logged in helpdesk session", nickname = "logoutHelpdesk", notes = "", tags={ "helpdesk", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/helpdesk/logout",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    // ResponseEntity<Void> logoutHelpdesk();
 
 
     @ApiOperation(value = "find ticket by ID", nickname = "updateHelpdesk", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })

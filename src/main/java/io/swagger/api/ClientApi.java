@@ -42,22 +42,22 @@ public interface ClientApi {
     ResponseEntity<Void> createUser(@RequestParam String userName, @RequestParam String email,@RequestParam String password, @RequestParam Integer phone,  @RequestParam Integer Client_id, @RequestParam String firstName, @RequestParam String lastName);
 
 
-    @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/client/user/createWithArray",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
+    // @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags={ "client", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/client/user/createWithArray",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    // ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
 
 
-    @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithListInput", notes = "", tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/client/user/createWithList",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Void> createUsersWithListInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
+    // @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithListInput", notes = "", tags={ "client", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/client/user/createWithList",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.POST)
+    // ResponseEntity<Void> createUsersWithListInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
 
 
     @ApiOperation(value = "Delete user", nickname = "deleteUser", notes = "This can only be done by the logged in client.", tags={ "client", })
@@ -117,13 +117,13 @@ public interface ClientApi {
     @GetMapping(path="/client/users")
     public Iterable<User> getUsersClient(@RequestParam Integer Client_id);
 
-    @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/client/logout",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> logoutClient();
+    // @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/client/logout",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    // ResponseEntity<Void> logoutClient();
 
 
     @ApiOperation(value = "Updated user", nickname = "updateUser", notes = "This can only be done by the logged in user.", tags={ "client", })

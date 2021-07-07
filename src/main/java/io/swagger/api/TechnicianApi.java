@@ -73,13 +73,13 @@ public interface TechnicianApi {
     Iterable<Project> getProjectsTechnician(@RequestParam Integer id);
 
 
-    @ApiOperation(value = "Logs out current logged in technician session", nickname = "logoutTechnician", notes = "", tags={ "technician", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/technician/logout",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> logoutTechnician();
+    // @ApiOperation(value = "Logs out current logged in technician session", nickname = "logoutTechnician", notes = "", tags={ "technician", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/technician/logout",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    // ResponseEntity<Void> logoutTechnician();
 
 
     @ApiOperation(value = "Update a issue", nickname = "updateTechnician", notes = "This can only be done by the logged in admin with the role of technician.", tags={ "technician", })

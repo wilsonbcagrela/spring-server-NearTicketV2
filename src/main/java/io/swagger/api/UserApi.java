@@ -97,13 +97,13 @@ public interface UserApi {
     @ResponseBody Iterable<Ticket> getTickets(@RequestParam Integer Project_id);
 
 
-    @ApiOperation(value = "Logs out current logged in user session", nickname = "logoutUser", notes = "", tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/user/logout",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> logoutUser();
+    // @ApiOperation(value = "Logs out current logged in user session", nickname = "logoutUser", notes = "", tags={ "user", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/user/logout",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    // ResponseEntity<Void> logoutUser();
 
 
     @ApiOperation(value = "Update an existing ticket", nickname = "updateTicket", notes = "", response = Ticket.class, tags={ "user", })

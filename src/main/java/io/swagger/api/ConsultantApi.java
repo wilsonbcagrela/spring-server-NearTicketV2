@@ -73,13 +73,13 @@ public interface ConsultantApi {
     Iterable<Ticket> getRequestTicketById(@RequestParam Integer id, @RequestParam Integer Project_id);
 
 
-    @ApiOperation(value = "Logs out current logged in consultant session", nickname = "logoutConsultant", notes = "", tags={ "consultant", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    @RequestMapping(value = "/consultant/logout",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-    ResponseEntity<Void> logoutConsultant();
+    // @ApiOperation(value = "Logs out current logged in consultant session", nickname = "logoutConsultant", notes = "", tags={ "consultant", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation") })
+    // @RequestMapping(value = "/consultant/logout",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    // ResponseEntity<Void> logoutConsultant();
 
 
     @ApiOperation(value = "Update a request", nickname = "updateConsultant", notes = "This can only be done by the logged in admin with the role of consultant.", tags={ "consultant", })
