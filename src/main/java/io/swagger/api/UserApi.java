@@ -5,6 +5,7 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
@@ -106,6 +107,10 @@ public interface UserApi {
     //     method = RequestMethod.GET)
     @GetMapping(path="/users")
     @ResponseBody Iterable<User> getUsersOfAClient(@RequestParam Integer Client_id);
+
+    @ApiOperation(value = "Returns client associated user", nickname = "getClientUser", notes = "", tags={ "user", })
+    @GetMapping(path="/user/client")
+    @ResponseBody Iterable<Client> getClientOfUser(@RequestParam Integer id);
 
 
     // @ApiOperation(value = "Logs out current logged in user session", nickname = "logoutUser", notes = "", tags={ "user", })

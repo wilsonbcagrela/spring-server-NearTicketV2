@@ -1,6 +1,7 @@
 package io.swagger.api.Controllers;
 
 import io.swagger.model.Admin;
+import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
@@ -10,6 +11,7 @@ import io.swagger.model.Ticket.StatusEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.api.UserApi;
 import io.swagger.api.Repositories.AdminRepository;
+import io.swagger.api.Repositories.ClientRepository;
 import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
@@ -44,6 +46,8 @@ public class UserApiController implements UserApi {
     private AdminRepository adminRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ClientRepository clientRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -51,6 +55,9 @@ public class UserApiController implements UserApi {
     }
     public @ResponseBody Iterable<User> getUsersOfAClient(@RequestParam Integer Client_id){
         return userRepository.findAllUserOfClient(Client_id);
+    }
+    public @ResponseBody Iterable<Client> getClientOfUser(@RequestParam Integer id){
+        return clientRepository.findClient(id);
     }
     public ResponseEntity<Project> addProject(@RequestParam Integer id, @RequestParam Integer Client_id, @RequestParam String name, @RequestParam String description) {
 
