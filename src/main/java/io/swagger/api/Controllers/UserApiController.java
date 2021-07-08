@@ -49,7 +49,9 @@ public class UserApiController implements UserApi {
         this.objectMapper = objectMapper;
         this.request = request;
     }
-
+    public @ResponseBody Iterable<User> getUsersOfAClient(@RequestParam Integer Client_id){
+        return userRepository.findAllUserOfClient(Client_id);
+    }
     public ResponseEntity<Project> addProject(@RequestParam Integer id, @RequestParam Integer Client_id, @RequestParam String name, @RequestParam String description) {
 
         Project project = new Project();

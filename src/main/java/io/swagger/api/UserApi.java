@@ -7,6 +7,7 @@ package io.swagger.api;
 
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
+import io.swagger.model.User;
 import io.swagger.model.Ticket.GravityEnum;
 import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
@@ -95,6 +96,16 @@ public interface UserApi {
     //     method = RequestMethod.GET)
     @GetMapping(path="/user/project/tickets")
     @ResponseBody Iterable<Ticket> getTickets(@RequestParam Integer Project_id);
+
+    @ApiOperation(value = "Returns users associated with the client", nickname = "getUsersClient", notes = "", tags={ "user", })
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 404, message = "tickets not found") })
+    // @RequestMapping(value = "/user/project/tickets",
+    //     produces = { "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/users")
+    @ResponseBody Iterable<User> getUsersOfAClient(@RequestParam Integer Client_id);
 
 
     // @ApiOperation(value = "Logs out current logged in user session", nickname = "logoutUser", notes = "", tags={ "user", })
