@@ -76,16 +76,17 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status, @RequestParam Integer Project_id) {
-
+    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id) {
+        // StatusEnum status;
+        
         Ticket ticket = new Ticket();
         ticket.setName(name);
         ticket.setDescription(description);
         ticket.setDeadLine(deadLine);
         ticket.setUrgency(urgency);
         ticket.gravity(gravity);
-        ticket.setSupervisor(supervisor);
-        ticket.status(status);
+        // ticket.setSupervisor(supervisor);
+        ticket.status(StatusEnum.NOT_INITIATED);
         ticket.setIsRequest(false);
         ticket.setIsIssue(false);
         ticket.setProject_id(Project_id);
