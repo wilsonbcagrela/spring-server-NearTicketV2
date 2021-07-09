@@ -56,6 +56,9 @@ public class UserApiController implements UserApi {
     public @ResponseBody Iterable<User> getUsersOfAClient(@RequestParam Integer Client_id){
         return userRepository.findAllUserOfClient(Client_id);
     }
+    public @ResponseBody Iterable<User> getUsersOfAProject(@RequestParam Integer project_id){
+        return projectRepository.findOne(project_id).getUser();
+    }
     public @ResponseBody Iterable<Client> getClientOfUser(@RequestParam Integer id){
         return clientRepository.findClient(id);
     }
