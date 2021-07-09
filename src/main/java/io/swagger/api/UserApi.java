@@ -5,6 +5,7 @@
  */
 package io.swagger.api;
 
+import io.swagger.model.Admin;
 import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
@@ -41,9 +42,13 @@ public interface UserApi {
     @PostMapping(path="/user/project")
     ResponseEntity<Project> addProject(@RequestParam Integer id,@RequestParam Integer Client_id, @RequestParam String name, @RequestParam String description);
 
-    @ApiOperation(value = "get users of a project", nickname = "getUsersFromProject", notes = "Here you can find all users of a project", response = User.class, tags={ "user", })
+    @ApiOperation(value = "Returns users of a project", nickname = "getUsersFromProject", notes = "Here you can find all users of a project", response = User.class, tags={ "user", })
     @GetMapping(path="/users/project")
     Iterable<User> getUsersOfAProject(@RequestParam Integer project_id);
+
+    @ApiOperation(value = "Returns admins of a project", nickname = "getAdminsFromProject", notes = "Here you can find all admins of a project", response = Admin.class, tags={ "user", })
+    @GetMapping(path="/users/project/admins")
+    Iterable<Admin> getAdminsOfAProject(@RequestParam Integer project_id);
 
 
     @ApiOperation(value = "Add a ticket to a project", nickname = "addTicket", notes = "Here you can add a ticket to an a existing project", response = Ticket.class, tags={ "user", })
