@@ -78,15 +78,16 @@ public interface HelpdeskApi {
     @ResponseBody Iterable<Project> getProjectsHelpdesk(@RequestParam Integer id);
 
     @ApiOperation(value = "Update ticket to be an issue or a request", nickname = "getTicketByIdHelpdesk", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 202, message = "Accepted operation"),
-        @ApiResponse(code = 400, message = "Invalid ticket supplied"),
-        @ApiResponse(code = 404, message = "Ticket not found") })
-    @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.PUT)
-        ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 202, message = "Accepted operation"),
+    //     @ApiResponse(code = 400, message = "Invalid ticket supplied"),
+    //     @ApiResponse(code = 404, message = "Ticket not found") })
+    // @RequestMapping(value = "/helpdesk/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.PUT)
+    @PostMapping(path="/helpdesk/project/ticket/{ticketId}")
+    ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get tickets", nickname = "getTicketsHelpdesk", notes = "Gets a list of all the ticket", response = Ticket.class, tags={ "helpdesk", })
