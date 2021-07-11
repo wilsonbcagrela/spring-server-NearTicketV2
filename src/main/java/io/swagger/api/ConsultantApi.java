@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,7 +91,7 @@ public interface ConsultantApi {
     // @RequestMapping(value = "/consultant/project/ticket/{ticketId}",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.PUT)
-    @PutMapping(path="/consultant/project/ticket/{ticketId}")
+    @PostMapping(path="/consultant/project/ticket/{ticketId}")
     ResponseEntity<Void> updateConsultant(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 }
