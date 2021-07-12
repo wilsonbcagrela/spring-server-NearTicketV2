@@ -86,14 +86,13 @@ public class UserApiController implements UserApi {
     }
 
     public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam Date deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id, @RequestParam String owner,@RequestParam Date creationDate) {
-        // StatusEnum status;
+  
         Ticket ticket = new Ticket();
         ticket.setName(name);
         ticket.setDescription(description);
         ticket.setDeadLine(deadLine);
         ticket.setUrgency(urgency);
         ticket.gravity(gravity);
-        // ticket.setSupervisor(supervisor);
         ticket.status(StatusEnum.NOT_INITIATED);
         ticket.setIsRequest(false);
         ticket.setIsIssue(false);
@@ -138,9 +137,9 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id,@RequestParam Integer Project_id){
+    public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id, @RequestParam Integer Project_id){
         //cuidado se o criador do projeto adcionar-se a si proprio pode dar problemas
-     
+        
         Project project = projectRepository.findOne(Project_id);
         userRepository.findUserById(id, Client_id).getProject().add(project);
 
