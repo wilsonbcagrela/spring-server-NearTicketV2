@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +85,7 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Project>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id, @RequestParam String owner,@RequestParam String creationDate) {
+    public ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam Date deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id, @RequestParam String owner,@RequestParam Date creationDate) {
         // StatusEnum status;
         Ticket ticket = new Ticket();
         ticket.setName(name);

@@ -13,6 +13,9 @@ import io.swagger.model.User;
 import io.swagger.model.Ticket.GravityEnum;
 import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
+
+import java.sql.Date;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,7 +62,7 @@ public interface UserApi {
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.POST)
     @PostMapping(path="/user/project/ticket")
-    ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id, @RequestParam String owner,@RequestParam String creationDate);
+    ResponseEntity<Ticket> addTicket(@RequestParam String name, @RequestParam String description, @RequestParam Date deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam Integer Project_id, @RequestParam String owner,@RequestParam Date creationDate);
 
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicket", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "user", })

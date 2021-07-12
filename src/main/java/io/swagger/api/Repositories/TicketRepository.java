@@ -20,21 +20,21 @@ import io.swagger.model.Ticket.StatusEnum;
 
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
-    @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1")
+    @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1 ORDER BY a.id DESC")
     @ResponseBody Iterable<Ticket> findTicketsOfAProject(@RequestParam Integer Project_id);
 
     @Query(value ="SELECT a FROM Ticket a WHERE a.Project_id =?1 AND a.id = ?2")
     @ResponseBody Iterable<Ticket> findTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
 
     //Issue queries --------------------------------------------------------------------------------------
-    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1")
+    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1 ORDER BY a.id DESC")
     @ResponseBody Iterable<Ticket> findIssueTickets(@RequestParam Integer Project_id);
     
     @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 1 AND a.isRequest = 0 AND a.Project_id =?1 AND a.id = ?2")
     @ResponseBody Iterable<Ticket> findIssueTicketsById(@RequestParam Integer Project_id, @RequestParam Integer id);
     
     //Request queries-------------------------------------------------------------------------------------
-    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.Project_id =?1")
+    @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.Project_id =?1 ORDER BY a.id DESC")
     @ResponseBody Iterable<Ticket> findRequestTickets(@RequestParam Integer Project_id);
     
     @Query(value ="SELECT a FROM Ticket a WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.Project_id =?1 AND a.id = ?2")

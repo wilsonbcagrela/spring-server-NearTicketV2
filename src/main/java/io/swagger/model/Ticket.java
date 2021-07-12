@@ -1,5 +1,6 @@
 package io.swagger.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,7 @@ public class Ticket   {
 
   private String description = null;
 
-  private String deadLine = null;
+  private Date deadLine = null;
 
   private Boolean urgency = null;
 
@@ -118,7 +119,7 @@ public class Ticket   {
   private String owner = null;
 
   @JsonProperty("creationDate")
-  private String creationDate = null; 
+  private Date creationDate = null; 
 
   public String getOwner() {
     return owner;
@@ -127,11 +128,11 @@ public class Ticket   {
   public void setOwner(String owner) {
     this.owner = owner;
   }
-  public String getCreationDate() {
+  public Date getCreationDate() {
     return creationDate;
   }
 
-  public void setCreationDate(String creationDate) {
+  public void setCreationDate(Date creationDate) {
     this.creationDate = creationDate;
   }
   public Integer getId() {
@@ -201,11 +202,11 @@ public class Ticket   {
   // @ApiModelProperty(example = "deadline to fix the issue", value = "")
 
 
-  public String getDeadLine() {
+  public Date getDeadLine() {
     return deadLine;
   }
 
-  public void setDeadLine(String deadLine) {
+  public void setDeadLine(Date deadLine) {
     this.deadLine = deadLine;
   }
 
