@@ -1,5 +1,6 @@
 package io.swagger.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
@@ -113,9 +114,26 @@ public class Ticket   {
   //   this.id = id;
   //   return this;
   // }
+  @JsonProperty("owner")
+  private String owner = null;
 
+  @JsonProperty("creationDate")
+  private String creationDate = null; 
 
+  public String getOwner() {
+    return owner;
+  }
 
+  public void setOwner(String owner) {
+    this.owner = owner;
+  }
+  public String getCreationDate() {
+    return creationDate;
+  }
+
+  public void setCreationDate(String creationDate) {
+    this.creationDate = creationDate;
+  }
   public Integer getId() {
     return id;
   }
