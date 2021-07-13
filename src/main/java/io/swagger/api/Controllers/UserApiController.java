@@ -2,6 +2,7 @@ package io.swagger.api.Controllers;
 
 import io.swagger.model.Admin;
 import io.swagger.model.Client;
+import io.swagger.model.Comment;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.api.UserApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
+import io.swagger.api.Repositories.CommentRepository;
 import io.swagger.api.Repositories.ProjectRepository;
 import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
@@ -51,6 +53,8 @@ public class UserApiController implements UserApi {
     private UserRepository userRepository;
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private CommentRepository commentRepository;
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -144,5 +148,15 @@ public class UserApiController implements UserApi {
 
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<Comment> addCommentToTicket(@RequestParam String text, @RequestParam String owner, @RequestParam Date creationDate ,@RequestParam Ticket ticket_id){
+        Comment comment = new Comment();
+        comment.setText(text);
+        comment.setOwner(owner);
+        comment.setCreationDate(creationDate);
+        comment.setTicket(ticket_id);
+        commentRepository.save(comment);
+        return new ResponseEntity<Comment>(HttpStatus.CREATED);
     }
 }

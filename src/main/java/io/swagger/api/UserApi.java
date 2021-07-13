@@ -10,6 +10,7 @@ import io.swagger.model.Client;
 import io.swagger.model.Project;
 import io.swagger.model.Ticket;
 import io.swagger.model.User;
+import io.swagger.model.Comment;
 import io.swagger.model.Ticket.GravityEnum;
 import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
@@ -151,4 +152,9 @@ public interface UserApi {
     @ApiOperation(value = "Add a user to a project", nickname = "AddUserProject", notes = "", response = Project.class, tags={ "user", })
     @PostMapping(path="/user/project/addUser")
     ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id,@RequestParam Integer Project_id);
+
+    @ApiOperation(value = "Add a comment to a ticket", nickname = "AddCommentUser", notes = "", response = Comment.class, tags={ "user" })
+    @PostMapping(path="/user/project/ticket/addComment")
+    ResponseEntity<Comment> addCommentToTicket(@RequestParam String text, @RequestParam String owner, @RequestParam Date creationDate ,@RequestParam Ticket ticket_id);
+
 }

@@ -39,6 +39,14 @@ public class Comment {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Ticket ticket;
+    
+    public Ticket getTicket() {
+        return ticket;
+    }
+    
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
 
     public Integer getId() {
         return id;
@@ -61,7 +69,7 @@ public class Comment {
     public void setOwner(String owner) {
         this.owner = owner;
     }
-    
+
     public Date getCreationDate() {
         return creationDate;
     }
