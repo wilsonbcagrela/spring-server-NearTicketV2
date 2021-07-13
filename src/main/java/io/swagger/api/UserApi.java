@@ -79,26 +79,26 @@ public interface UserApi {
 
 
     @ApiOperation(value = "Returns all projects associated with the user", nickname = "getProjects", notes = "Returns projects", tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 404, message = "Projects not found") })
-    @RequestMapping(value = "/user/projects",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    // @GetMapping(path="/user/projects")
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation"),
+    //     @ApiResponse(code = 404, message = "Projects not found") })
+    // @RequestMapping(value = "/user/projects",
+    //     produces = { "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/user/projects")
     @ResponseBody Iterable<Project> getProjects(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Find ticket by ID", nickname = "getTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "user", })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-        @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "ticket not found") })
-    @RequestMapping(value = "/user/project/ticket/{ticketId}",
-        produces = { "application/xml", "application/json" }, 
-        method = RequestMethod.GET)
-        // @GetMapping(path="/user/project/ticket/{ticketId}")
-        @ResponseBody Iterable<Ticket> getTicketById(@RequestParam Integer Project_id, @RequestParam Integer id);
+    // @ApiResponses(value = { 
+    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
+    //     @ApiResponse(code = 404, message = "ticket not found") })
+    // @RequestMapping(value = "/user/project/ticket/{ticketId}",
+    //     produces = { "application/xml", "application/json" }, 
+    //     method = RequestMethod.GET)
+    @GetMapping(path="/user/project/ticket/{ticketId}")
+    @ResponseBody Iterable<Ticket> getTicketById(@RequestParam Integer Project_id, @RequestParam Integer id);
 
 
     @ApiOperation(value = "Returns tickets associated with the project by status", nickname = "getTickets", notes = "Returns a map of status", tags={ "user", })
@@ -158,6 +158,6 @@ public interface UserApi {
     ResponseEntity<Comment> addCommentToTicket(@RequestParam String text, @RequestParam String owner, @RequestParam Date creationDate ,@RequestParam Ticket ticket_id);
 
     @ApiOperation(value = "Get a comments off a ticket", nickname = "GetCommentUser", notes = "", response = Comment.class, tags={ "user" })
-    @PostMapping(path="/user/project/ticket/getComment")
+    @GetMapping(path="/user/project/ticket/getComment")
     @ResponseBody Iterable<Comment> getCommentOffTicket(@RequestParam Integer ticket_id);
 }
