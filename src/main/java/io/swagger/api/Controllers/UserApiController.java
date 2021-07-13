@@ -138,7 +138,6 @@ public class UserApiController implements UserApi {
     }
 
     public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id, @RequestParam Integer Project_id){
-        //cuidado se o criador do projeto adcionar-se a si proprio pode dar problemas
         
         Project project = projectRepository.findOne(Project_id);
         userRepository.findUserById(id, Client_id).getProject().add(project);
