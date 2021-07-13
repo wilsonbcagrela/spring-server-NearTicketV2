@@ -157,4 +157,7 @@ public interface UserApi {
     @PostMapping(path="/user/project/ticket/addComment")
     ResponseEntity<Comment> addCommentToTicket(@RequestParam String text, @RequestParam String owner, @RequestParam Date creationDate ,@RequestParam Ticket ticket_id);
 
+    @ApiOperation(value = "Get a comments off a ticket", nickname = "GetCommentUser", notes = "", response = Comment.class, tags={ "user" })
+    @PostMapping(path="/user/project/ticket/getComment")
+    @ResponseBody Iterable<Comment> getCommentOffTicket(@RequestParam Integer ticket_id);
 }

@@ -159,4 +159,8 @@ public class UserApiController implements UserApi {
         commentRepository.save(comment);
         return new ResponseEntity<Comment>(HttpStatus.CREATED);
     }
+
+    public @ResponseBody Iterable<Comment> getCommentOffTicket(@RequestParam Integer ticket_id){
+        return commentRepository.getCommentsOfTicket(ticket_id);
+    }
 }
