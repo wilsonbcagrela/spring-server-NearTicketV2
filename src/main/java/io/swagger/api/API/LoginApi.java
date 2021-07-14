@@ -3,7 +3,7 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.api.API;
 
 import io.swagger.annotations.*;
 import io.swagger.model.Admin;

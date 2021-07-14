@@ -5,7 +5,8 @@ import io.swagger.model.Ticket;
 import io.swagger.model.Ticket.StatusEnum;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.api.TechnicianApi;
+
+import io.swagger.api.API.TechnicianApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.TicketRepository;
 

@@ -10,7 +10,8 @@ import io.swagger.model.Ticket.GravityEnum;
 import io.swagger.model.Ticket.StatusEnum;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.api.UserApi;
+
+import io.swagger.api.API.UserApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
 import io.swagger.api.Repositories.CommentRepository;

@@ -8,7 +8,8 @@ import io.swagger.model.User;
 import io.swagger.model.Admin.RoleEnum;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.api.HelpdeskApi;
+
+import io.swagger.api.API.HelpdeskApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
 import io.swagger.api.Repositories.ProjectRepository;

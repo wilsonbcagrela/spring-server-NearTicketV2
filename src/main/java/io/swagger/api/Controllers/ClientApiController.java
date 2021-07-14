@@ -8,7 +8,7 @@ import io.swagger.model.User;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
-import io.swagger.api.ClientApi;
+import io.swagger.api.API.ClientApi;
 import io.swagger.api.Repositories.TicketRepository;
 import io.swagger.api.Repositories.UserRepository;
 

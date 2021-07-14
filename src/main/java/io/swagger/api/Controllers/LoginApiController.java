@@ -3,7 +3,8 @@ import io.swagger.model.Admin;
 import io.swagger.model.Client;
 import io.swagger.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.api.LoginApi;
+
+import io.swagger.api.API.LoginApi;
 import io.swagger.api.Repositories.AdminRepository;
 import io.swagger.api.Repositories.ClientRepository;
 import io.swagger.api.Repositories.UserRepository;

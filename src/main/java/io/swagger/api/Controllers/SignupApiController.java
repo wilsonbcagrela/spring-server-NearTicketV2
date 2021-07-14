@@ -2,7 +2,8 @@ package io.swagger.api.Controllers;
 
 import io.swagger.model.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.api.SignupApi;
+
+import io.swagger.api.API.SignupApi;
 import io.swagger.api.Repositories.ClientRepository;
 
 import org.slf4j.Logger;
