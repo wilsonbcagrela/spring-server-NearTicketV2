@@ -109,10 +109,11 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Ticket>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> deleteTicket(@RequestParam Integer id) {
+    public ResponseEntity<Ticket> deleteTicket(@RequestParam Integer id, @RequestParam Integer Project_id) {
         
-        ticketRepository.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+        ticketRepository.DeleteTicket(id, Project_id);
+        // ticketRepository.delete(id);
+        return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
     }
 
     public @ResponseBody Iterable<Project> getProjects(@RequestParam Integer id, @RequestParam Integer Client_id) {

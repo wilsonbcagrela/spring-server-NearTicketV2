@@ -75,8 +75,8 @@ public interface UserApi {
     // @RequestMapping(value = "/user/project/ticket/{ticketId}",
     //     produces = { "application/xml", "application/json" }, 
     //     method = RequestMethod.DELETE)
-    @DeleteMapping("/user/project/ticket/{ticketId}")
-    ResponseEntity<Void> deleteTicket(@RequestParam Integer id);
+    @PostMapping("/user/project/ticket/{ticketId}")
+    ResponseEntity<Ticket> deleteTicket(@RequestParam Integer id, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Returns all projects associated with the user", nickname = "getProjects", notes = "Returns projects", tags={ "user", })
