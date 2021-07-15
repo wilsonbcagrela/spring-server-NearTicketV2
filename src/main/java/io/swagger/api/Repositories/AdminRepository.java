@@ -19,4 +19,6 @@ public interface AdminRepository extends CrudRepository<Admin, Integer> {
     @Query(value ="SELECT a FROM Admin a WHERE a.id =?1")
     @ResponseBody Admin findAdminById(@RequestParam Integer id);
     
+    @Query(value ="SELECT a FROM Admin a WHERE a.userName =?1")
+    @ResponseBody Admin findAdminByUserName(@RequestParam String userName);
 }

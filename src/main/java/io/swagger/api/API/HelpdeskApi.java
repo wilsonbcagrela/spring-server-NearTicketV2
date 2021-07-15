@@ -105,6 +105,6 @@ public interface HelpdeskApi {
     
     @ApiOperation(value = "Add a admin to a project", nickname = "addAdmin", notes = "This can only be done by the logged in admin with the role of helpdesk.", tags={ "helpdesk", })
     @PostMapping(path="/helpdesk/project/addAdmin")
-    ResponseEntity<Project> addProjectToAdmin(@RequestParam Integer id,@RequestParam Integer Project_id);
+    ResponseEntity<Project> addProjectToAdmin(@RequestParam String userName,@RequestParam Integer Project_id);
 
 }

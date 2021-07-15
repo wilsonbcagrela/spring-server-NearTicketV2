@@ -111,11 +111,11 @@ public class HelpdeskApiController implements HelpdeskApi {
         adminRepository.save(admin);
         return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
-    public ResponseEntity<Project> addProjectToAdmin(@RequestParam Integer id,@RequestParam Integer Project_id){
+    public ResponseEntity<Project> addProjectToAdmin(@RequestParam String userName,@RequestParam Integer Project_id){
      
         Project project = projectRepository.findOne(Project_id);
-        adminRepository.findOne(id).getProjects().add(project);
-
+        // adminRepository.findOne(id).getProjects().add(project);
+        adminRepository.findAdminByUserName(userName).getProjects().add(project);
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
     }
