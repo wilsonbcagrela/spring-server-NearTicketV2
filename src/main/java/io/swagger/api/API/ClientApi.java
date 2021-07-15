@@ -56,7 +56,7 @@ public interface ClientApi {
         @ApiResponse(code = 404, message = "Projects not found") 
     })
     @GetMapping(path="/client/projects")
-    List<Set<Project>> getProjectsClient(@RequestParam Integer Client_id);
+    Set<Set<Project>> getProjectsClient(@RequestParam Integer Client_id);
     
 
 

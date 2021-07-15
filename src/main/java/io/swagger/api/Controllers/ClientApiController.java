@@ -76,15 +76,15 @@ public class ClientApiController implements ClientApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public @ResponseBody List<Set<Project>> getProjectsClient(@RequestParam Integer Client_id) {
+    public @ResponseBody Set<Set<Project>> getProjectsClient(@RequestParam Integer Client_id) {
         
         List<Set<Project>> projectsClient = new Stack<Set<Project>>();
         for (User user : userRepository.findAllUserOfClient(Client_id)) {
             projectsClient.add(user.getProject());
-            
         }
-        
-        return projectsClient;
+        Set<Set<Project>> unique = new HashSet<>(projectsClient);
+        // return projectsClient;
+        return unique;
     }
 
     public @ResponseBody Iterable<Ticket> getTicketsClient(@RequestParam Integer Project_id) {
