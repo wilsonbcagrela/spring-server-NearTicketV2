@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import io.swagger.model.Comment;
-import io.swagger.model.Ticket;
 
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
     

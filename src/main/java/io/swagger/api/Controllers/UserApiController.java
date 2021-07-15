@@ -29,8 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,6 +43,7 @@ public class UserApiController implements UserApi {
     private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
+
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
@@ -57,6 +56,7 @@ public class UserApiController implements UserApi {
     private ClientRepository clientRepository;
     @Autowired
     private CommentRepository commentRepository;
+
     @org.springframework.beans.factory.annotation.Autowired
     public UserApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
@@ -79,13 +79,11 @@ public class UserApiController implements UserApi {
         Project project = new Project();
         project.setName(name);
         project.setDescription(description);
+
         for (Admin admin : adminRepository.findAll()) {
             admin.getProjects().add(project);
         }
-        
-        // for (User user : userRepository.findAllUserOfClient(Client_id)) {
-        //     user.getProject().add(project);
-        // }
+    
         userRepository.findUserById(id, Client_id).getProject().add(project);
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.CREATED);
@@ -131,11 +129,6 @@ public class UserApiController implements UserApi {
     public @ResponseBody Iterable<Ticket> getTickets(@RequestParam Integer Project_id) {
         
         return ticketRepository.findTicketsOfAProject(Project_id);
-    }
-
-    public ResponseEntity<Void> logoutUser() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     public ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) Date deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity) {

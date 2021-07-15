@@ -27,7 +27,7 @@ public class LoginApiController implements LoginApi {
 
     private static final Logger log = LoggerFactory.getLogger(LoginApiController.class);
 
-    // private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     private final HttpServletRequest request;
     @Autowired
@@ -39,7 +39,7 @@ public class LoginApiController implements LoginApi {
 
     @org.springframework.beans.factory.annotation.Autowired
     public LoginApiController(ObjectMapper objectMapper, HttpServletRequest request) {
-        // this.objectMapper = objectMapper;
+        this.objectMapper = objectMapper;
         this.request = request;
     }
 

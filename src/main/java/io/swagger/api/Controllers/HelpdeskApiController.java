@@ -92,11 +92,6 @@ public class HelpdeskApiController implements HelpdeskApi {
         return userRepository.findAllUserOfClient(Client_id);
     }
 
-    public ResponseEntity<Void> logoutHelpdesk() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<Void> updateHelpdesk(@RequestParam Boolean isRequest,@RequestParam Boolean isIssue,@RequestParam Integer id,@RequestParam Integer Project_id) {
         
         ticketRepository.UpdateTicketsToBeRequestOrIssue(isRequest, isIssue, id, Project_id);
@@ -117,7 +112,6 @@ public class HelpdeskApiController implements HelpdeskApi {
         return new ResponseEntity<Admin>(HttpStatus.CREATED);
     }
     public ResponseEntity<Project> addProjectToAdmin(@RequestParam Integer id,@RequestParam Integer Project_id){
-        //cuidado se o criador do projeto adcionar-se a si proprio pode dar problemas
      
         Project project = projectRepository.findOne(Project_id);
         adminRepository.findOne(id).getProjects().add(project);
@@ -125,17 +119,4 @@ public class HelpdeskApiController implements HelpdeskApi {
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
     }
-    // public void manytomanytest(@RequestParam Integer id){
-        
-    //     Project project = new Project();
-    //     project.setName("name");
-    //     project.setDescription("description");
-        
-
-    //     project.getAdmin().add(adminRepository.findAdminById(id));
-    //     adminRepository.findAdminById(id).getProjects().add(project);
-
-    //     // adminRepository.save(admin);
-    //     projectRepository.save(project);
-    // }
 }

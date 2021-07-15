@@ -34,31 +34,10 @@ public interface ClientApi {
 
     @ApiOperation(value = "Create user", nickname = "createUser", notes = "This can only be done by the logged in user.", tags={ "client", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/client/user",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.POST)
+        @ApiResponse(code = 200, message = "successful operation") 
+    })
     @PostMapping(path="/client/user")
     ResponseEntity<Void> createUser(@RequestParam String userName, @RequestParam String email,@RequestParam String password, @RequestParam Integer phone,  @RequestParam Integer Client_id, @RequestParam String firstName, @RequestParam String lastName);
-
-
-    // @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithArrayInput", notes = "", tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/client/user/createWithArray",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.POST)
-    // ResponseEntity<Void> createUsersWithArrayInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
-
-
-    // @ApiOperation(value = "Creates list of users with given input array", nickname = "createUsersWithListInput", notes = "", tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/client/user/createWithList",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.POST)
-    // ResponseEntity<Void> createUsersWithListInput(@ApiParam(value = "List of user object" ,required=true )  @Valid @RequestBody List<User> body);
-
 
     @ApiOperation(value = "Delete user", nickname = "deleteUser", notes = "This can only be done by the logged in client.", tags={ "client", })
     @ApiResponses(value = { 
@@ -74,57 +53,40 @@ public interface ClientApi {
     @ApiOperation(value = "Returns all projects associated with the client", nickname = "getProjectsClient", notes = "Returns projects", tags={ "client", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation"),
-        @ApiResponse(code = 404, message = "Projects not found") })
-    @RequestMapping(value = "/client/projects",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+        @ApiResponse(code = 404, message = "Projects not found") 
+    })
+    @GetMapping(path="/client/projects")
     List<Set<Project>> getProjectsClient(@RequestParam Integer Client_id);
     
 
 
     @ApiOperation(value = "Returns all tickets associated with the client", nickname = "getTicketsClient", notes = "Returns projects", tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation"),
-    //     @ApiResponse(code = 404, message = "Projects not found") })
-    // @RequestMapping(value = "/client/project/tickets",
-    //     produces = { "application/json" }, 
-    //     method = RequestMethod.GET)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 404, message = "ticket not found") 
+    })
     @GetMapping(path="/client/project/tickets")
     Iterable<Ticket> getTicketsClient(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get user by id", nickname = "getUserByid", notes = "", response = User.class, tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
-    //     @ApiResponse(code = 400, message = "Invalid username supplied"),
-    //     @ApiResponse(code = 404, message = "User not found") })
-    // @RequestMapping(value = "/client/user/{username}",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = User.class),
+        @ApiResponse(code = 400, message = "Invalid username supplied"),
+        @ApiResponse(code = 404, message = "User not found") 
+    })
     @GetMapping(path="/client/user/{id}")
     User getUserById(@RequestParam Integer id, @RequestParam Integer Client_id);
 
 
     @ApiOperation(value = "Get all users", nickname = "getUsersClient", notes = "Gets a list of all users", response = User.class, tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = User.class),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/client/users",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
-    //gets all users of a specific client
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = User.class),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") 
+    })
     @GetMapping(path="/client/users")
     public Iterable<User> getUsersClient(@RequestParam Integer Client_id);
-
-    // @ApiOperation(value = "Logs out current logged in client session", nickname = "logoutClient", notes = "", tags={ "client", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/client/logout",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
-    // ResponseEntity<Void> logoutClient();
-
 
     @ApiOperation(value = "Updated user", nickname = "updateUser", notes = "This can only be done by the logged in user.", tags={ "client", })
     @ApiResponses(value = { 

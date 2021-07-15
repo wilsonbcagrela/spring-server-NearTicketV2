@@ -7,10 +7,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.springframework.validation.annotation.Validated;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,8 +45,6 @@ public class User   {
 
   private Integer Client_id;
   
-  //  @JoinColumn(name = "User_Client_id")
-  //-------------------------------------manytomany--------------------------------------
   @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(
@@ -69,18 +63,11 @@ public class User   {
   public void setId(Integer id) {
     this.id = id;
   }
-  // @JsonManagedReference
+
   @JsonIgnore
   public Set<Project> getProject(){
     return project;
   }
-  // public void addProject(Project project) {
-  //   this.getProject().add(project);
-  //   project.getUser().add(this);
-  // }
-  // public void setProject(Set<Project> project ){
-  //   this.project = project;
-  // }
 
   public Integer getClient_id() {
     return Client_id;

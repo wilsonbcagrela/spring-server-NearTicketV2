@@ -61,11 +61,6 @@ public class TechnicianApiController implements TechnicianApi {
         return adminRepository.findAdminById(id).getProjects();
     }
 
-    public ResponseEntity<Void> logoutTechnician() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<Void> updateTechnician(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id) {
         
         ticketRepository.UpdateTicketsTechnician(status, supervisor, id, Project_id);

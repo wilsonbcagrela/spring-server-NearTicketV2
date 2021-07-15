@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public interface SignupApi {
 
     @ApiOperation(value = "Where a client can make an account", nickname = "registerClient", notes = "This is only for clients", tags={ "signup", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/signup",
-    //     method = RequestMethod.POST)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 404, message = "Ticket not found")
+    })
     @PostMapping(path="/signup")
     @ResponseBody String registerClient(@RequestParam String name, @RequestParam String password,@RequestParam String email, @RequestParam Integer phone);
 

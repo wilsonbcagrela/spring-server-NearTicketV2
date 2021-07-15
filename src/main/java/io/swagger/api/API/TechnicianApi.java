@@ -13,10 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-06-04T14:58:39.313Z")
@@ -27,71 +25,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface TechnicianApi {
 
     @ApiOperation(value = "Delete ticket by ID", nickname = "deleteTicketTechnician", notes = "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors", tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.DELETE)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Ticket was deleted successfully"),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") })
     @DeleteMapping("/technician/project/ticket/{ticketId}")
     ResponseEntity<Void> deleteTicketTechnician(@RequestParam Integer id);
 
 
     @ApiOperation(value = "Find issue tickets by ID", nickname = "getIssueTicketById", notes = "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions", response = Ticket.class, tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") })
     @GetMapping(path="/technician/project/ticket/{ticketId}")
     Iterable<Ticket> getIssueTicketById(@RequestParam Integer id, @RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get tickets that are issues", nickname = "getIssues", notes = "Gets a list of all the tickets that are issues", response = Ticket.class, tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/technician/project/tickets",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Ticket.class),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") })
     @GetMapping(path="/technician/project/tickets")
     Iterable<Ticket> getIssues(@RequestParam Integer Project_id);
 
 
     @ApiOperation(value = "Get all projects", nickname = "getProjectsTechnician", notes = "Gets a list of all the projects", response = Project.class, tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation", response = Project.class),
-    //     @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    //     @ApiResponse(code = 404, message = "ticket not found") })
-    // @RequestMapping(value = "/technician/projects",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation", response = Project.class),
+        @ApiResponse(code = 400, message = "Invalid ID supplied"),
+        @ApiResponse(code = 404, message = "ticket not found") })
     @GetMapping(path="/technician/projects")
     Iterable<Project> getProjectsTechnician(@RequestParam Integer id);
 
-
-    // @ApiOperation(value = "Logs out current logged in technician session", nickname = "logoutTechnician", notes = "", tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation") })
-    // @RequestMapping(value = "/technician/logout",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.GET)
-    // ResponseEntity<Void> logoutTechnician();
-
-
     @ApiOperation(value = "Update a issue", nickname = "updateTechnician", notes = "This can only be done by the logged in admin with the role of technician.", tags={ "technician", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful operation"),
-    //     @ApiResponse(code = 400, message = "Invalid ticket supplied"),
-    //     @ApiResponse(code = 404, message = "Ticket not found") })
-    // @RequestMapping(value = "/technician/project/ticket/{ticketId}",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.PUT)
-    @PostMapping(path="/technician/project/ticket/{ticketId}")
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 400, message = "Invalid ticket supplied"),
+        @ApiResponse(code = 404, message = "Ticket not found") })
+    @PutMapping(path="/technician/project/ticket/{ticketId}")
     ResponseEntity<Void> updateTechnician(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id);
 
 }

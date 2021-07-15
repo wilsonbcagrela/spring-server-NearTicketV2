@@ -65,11 +65,6 @@ public class ConsultantApiController implements ConsultantApi {
         return ticketRepository.findRequestTicketsById(Project_id, id);
     }
 
-    public ResponseEntity<Void> logoutConsultant() {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     public ResponseEntity<Void> updateConsultant(@RequestParam StatusEnum status,@RequestParam String supervisor,@RequestParam Integer id,@RequestParam Integer Project_id) {
         
         ticketRepository.UpdateTicketsConsultant(status, supervisor, id, Project_id);

@@ -27,16 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface LoginApi {
 
     @ApiOperation(value = "Where all users can login", nickname = "login", notes = "This is all accounts", tags={ "login", })
-    // @ApiResponses(value = { 
-    //     @ApiResponse(code = 200, message = "successful login"),
-    //     @ApiResponse(code = 400, message = "Invalid username or password supplied") })
-    // @RequestMapping(value = "/login",
-    //     produces = { "application/xml", "application/json" }, 
-    //     method = RequestMethod.POST)
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful login"),
+        @ApiResponse(code = 400, message = "Invalid username or password supplied") })
     @GetMapping(path="/login")
     public Iterable<Client> loginClient(@RequestParam String email, @RequestParam String password);
+
     @GetMapping(path="/loginUser")
     public Iterable<User> loginUser(@RequestParam String email, @RequestParam String password);
+    
     @GetMapping(path="/loginAdmin")
     public Iterable<Admin> loginAdmin(@RequestParam String email, @RequestParam String password);
 

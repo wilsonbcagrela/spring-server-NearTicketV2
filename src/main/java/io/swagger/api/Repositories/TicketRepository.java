@@ -62,6 +62,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     @Query(value ="UPDATE Ticket a SET a.status =?1, a.supervisor = ?2  WHERE a.isIssue = 0 AND a.isRequest = 1 AND a.id = ?3 AND a.Project_id = ?4")
     void UpdateTicketsConsultant(StatusEnum status, String supervisor, Integer id, Integer Project_id);
 
+    @Transactional
     @Modifying
     @Query(value ="DELETE FROM Ticket a WHERE a.id = ?1 AND a.Project_id = ?2")
     void DeleteTicket(Integer id, Integer Project_id);
