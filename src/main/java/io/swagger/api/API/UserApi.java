@@ -119,7 +119,7 @@ public interface UserApi {
 
     @ApiOperation(value = "Add a user to a project", nickname = "AddUserProject", notes = "", response = Project.class, tags={ "user", })
     @PostMapping(path="/user/project/addUser")
-    ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id,@RequestParam Integer Project_id);
+    ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam String userName,@RequestParam Integer Project_id);
 
     @ApiOperation(value = "Add a comment to a ticket", nickname = "AddCommentUser", notes = "", response = Comment.class, tags={ "user" })
     @PostMapping(path="/user/project/ticket/addComment")

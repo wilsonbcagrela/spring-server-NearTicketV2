@@ -137,11 +137,11 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam Integer id, @RequestParam Integer Project_id){
+    public ResponseEntity<Project> addProjectToUser(@RequestParam Integer Client_id, @RequestParam String userName, @RequestParam Integer Project_id){
         
         Project project = projectRepository.findOne(Project_id);
-        userRepository.findUserById(id, Client_id).getProject().add(project);
-
+        // userRepository.findUserById(id, Client_id).getProject().add(project);
+        userRepository.findUserByUserName(userName, Client_id).getProject().add(project);
         projectRepository.save(project);
         return new ResponseEntity<Project>(HttpStatus.ACCEPTED);
     }
