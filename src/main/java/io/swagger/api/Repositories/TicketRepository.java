@@ -3,6 +3,8 @@ package io.swagger.api.Repositories;
 // import javax.transaction.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -42,8 +44,8 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value ="UPDATE Ticket a SET a.name =?1, a.description = ?2, a.urgency=?3, a.supervisor =?4, a.deadLine =?5, a.gravity =?6, a.status =?7  WHERE a.id = ?8 AND a.Project_id = ?9")
-    void UpdateTicketsById(String name, String description, boolean urgency, String supervisor, String deadLine, GravityEnum gravity, StatusEnum status, Integer id, Integer Project_id);
+    @Query(value ="UPDATE Ticket a SET a.name =?1, a.description = ?2, a.urgency=?3, a.deadLine =?4, a.gravity =?5 WHERE a.id = ?6 AND a.Project_id = ?7")
+    void UpdateTicketsById(String name, String description, boolean urgency, Date deadLine, GravityEnum gravity, Integer id, Integer Project_id);
 
     @Transactional
     @Modifying(clearAutomatically = true)

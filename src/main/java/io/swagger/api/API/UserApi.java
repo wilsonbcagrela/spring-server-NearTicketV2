@@ -16,6 +16,7 @@ import io.swagger.model.Ticket.StatusEnum;
 import io.swagger.annotations.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -146,7 +147,7 @@ public interface UserApi {
     //     consumes = { "application/json", "application/xml" },
     //     method = RequestMethod.PUT)
     @PutMapping(path="/user/project/ticket/{ticketId}")
-    ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) String deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity, @RequestParam(required = false) String supervisor,@RequestParam(required = false) StatusEnum status);
+    ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) Date deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity);
         //, @RequestParam String description, @RequestParam String deadLine, @RequestParam boolean urgency, @RequestParam GravityEnum gravity, @RequestParam String supervisor,@RequestParam StatusEnum status
 
     @ApiOperation(value = "Add a user to a project", nickname = "AddUserProject", notes = "", response = Project.class, tags={ "user", })

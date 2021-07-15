@@ -1,13 +1,16 @@
 package io.swagger.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -30,7 +33,7 @@ public class Comment {
 
     @JsonProperty("owner")
     private String owner = null;
-  
+    
     @JsonProperty("creationDate")
     private Date creationDate = null; 
 

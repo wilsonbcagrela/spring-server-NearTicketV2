@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -136,9 +137,9 @@ public class UserApiController implements UserApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) String deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity, @RequestParam(required = false) String supervisor,@RequestParam(required = false) StatusEnum status) {
+    public ResponseEntity<Ticket> updateTicket(@RequestParam Integer id,@RequestParam Integer Project_id , @RequestParam(required = false) String name, @RequestParam(required = false) String description, @RequestParam(required = false) Date deadLine, @RequestParam(required = false) boolean urgency, @RequestParam(required = false) GravityEnum gravity) {
         
-        ticketRepository.UpdateTicketsById(name,description, urgency, supervisor, deadLine, gravity,status, id, Project_id);
+        ticketRepository.UpdateTicketsById(name,description, urgency, deadLine, gravity, id, Project_id);
         return new ResponseEntity<Ticket>(HttpStatus.ACCEPTED);
     }
 
